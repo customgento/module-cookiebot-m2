@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/testSchema.xsd">
+    <test name="CustomGentoCookiebotScriptIsAddedToVariousPagesTest">
+        <annotations>
+            <stories value="Cookiebot script should be added to various pages."/>
+            <title value="Cookiebot script should be added to various pages."/>
+            <description value="Cookiebot script code should be added to various pages."/>
+            <severity value="MAJOR"/>
+        </annotations>
+        <before>
+            <createData entity="_defaultCategory" stepKey="defaultCategory"/>
+            <createData entity="_defaultProduct" stepKey="createProduct">
+                <requiredEntity createDataKey="defaultCategory"/>
+            </createData>
+            <createData entity="_defaultCmsPage" stepKey="defaultCmsPage"/>
+            <magentoCLI command="config:set web/cookiebot/enabled 1" stepKey="enableCookiebot"/>
+            <magentoCLI command="config:set web/cookiebot/id 123-456-789" stepKey="setCookiebotId"/>
+        </before>
+        <after>
+            <deleteData stepKey="removeTestProduct" createDataKey="createProduct"/>
+            <deleteData stepKey="removeTestCategory" createDataKey="defaultCategory"/>
+            <deleteData stepKey="removeTestCmsPage" createDataKey="defaultCmsPage"/>
+            <magentoCLI command="config:set web/cookiebot/enabled 0" stepKey="disableCookiebot"/>
+            <magentoCLI command="config:set web/cookiebot/id ''" stepKey="resetCookiebotId"/>
+        </after>
+        <amOnPage url="{{StorefrontHomePage.url}}" stepKey="amOnHomepage"/>
+        <actionGroup ref="CustomGentoCheckCookiebotScriptActionGroup" stepKey="checkScriptOnHomepage"/>
+        <amOnPage url="{{StorefrontCategoryPage.url($$defaultCategory.name$$)}}" stepKey="amOnCategoryPage"/>
+        <actionGroup ref="CustomGentoCheckCookiebotScriptActionGroup" stepKey="checkScriptOnCategoryPage"/>
+        <amOnPage url="{{StorefrontProductPage.url($$createProduct.custom_attributes[url_key]$$)}}" stepKey="amOnProductPage"/>
+        <actionGroup ref="CustomGentoCheckCookiebotScriptActionGroup" stepKey="checkScriptOnProductPage"/>
+        <amOnPage url="$$defaultCmsPage.identifier$$" stepKey="amOnCmsPage"/>
+        <actionGroup ref="CustomGentoCheckCookiebotScriptActionGroup" stepKey="checkScriptOnCmsPage"/>
+    </test>
+</tests>

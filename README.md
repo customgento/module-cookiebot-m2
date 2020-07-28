@@ -11,4 +11,4 @@ After installing the extension, just go to Stores > Configuration > Web > Cookie
 You need a [Cookiebot](https://www.cookiebot.com/) account, so that this extension does anything useful for you.
 
 ## Copyright
-(c) 2020 CustomGento GmbH
+&copy; 2020 CustomGento GmbH

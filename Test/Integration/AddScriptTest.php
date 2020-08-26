@@ -9,7 +9,7 @@ use Magento\Catalog\Api\CategoryRepositoryInterface;
 use Magento\Catalog\Api\ProductRepositoryInterface;
 use Magento\TestFramework\TestCase\AbstractController;
 
-class AddScriptPluginTest extends AbstractController
+class AddScriptTest extends AbstractController
 {
     /**
      * @var ProductRepositoryInterface

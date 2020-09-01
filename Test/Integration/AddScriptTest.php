@@ -5,22 +5,10 @@ declare(strict_types=1);
 namespace CustomGento\Cookiebot\Test\Integration\Plugin;
 
 use CustomGento\Cookiebot\Model\ScriptGenerator;
-use Magento\Catalog\Api\CategoryRepositoryInterface;
-use Magento\Catalog\Api\ProductRepositoryInterface;
 use Magento\TestFramework\TestCase\AbstractController;
 
 class AddScriptTest extends AbstractController
 {
-    /**
-     * @var ProductRepositoryInterface
-     */
-    private $productRepository;
-
-    /**
-     * @var CategoryRepositoryInterface
-     */
-    private $categoryRepository;
-
     /**
      * @var string
      */
@@ -29,9 +17,7 @@ class AddScriptTest extends AbstractController
     protected function setUp()
     {
         parent::setUp();
-        $this->productRepository  = $this->_objectManager->create(ProductRepositoryInterface::class);
-        $this->categoryRepository = $this->_objectManager->create(CategoryRepositoryInterface::class);
-        $this->script             = $this->_objectManager->create(ScriptGenerator::class)->generate();
+        $this->script = $this->_objectManager->create(ScriptGenerator::class)->generate();
     }
 
     /**
@@ -51,8 +37,7 @@ class AddScriptTest extends AbstractController
      */
     public function testScriptAddedOnProductPage(): void
     {
-        $product = $this->productRepository->get('simple');
-        $this->dispatch($product->getProductUrl());
+        $this->dispatch('/catalog/product/view/id/1');
         self::assertContains($this->script, $this->getResponse()->getBody());
     }
 
@@ -63,8 +48,7 @@ class AddScriptTest extends AbstractController
      */
     public function testScriptAddedOnCategoryPage(): void
     {
-        $category = $this->categoryRepository->get('333');
-        $this->dispatch($category->getUrl());
+        $this->dispatch('/catalog/category/view/id/333');
         self::assertContains($this->script, $this->getResponse()->getBody());
     }
 

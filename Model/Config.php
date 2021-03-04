@@ -10,6 +10,7 @@ class Config
 {
     public const XML_PATH_COOKIEBOT_ENABLED = 'web/cookiebot/enabled';
     public const XML_PATH_COOKIEBOT_ID = 'web/cookiebot/id';
+    public const XML_PATH_DATA_CULTURE  = 'web/cookiebot/data_culture';
 
     /**
      * @var ScopeConfigInterface
@@ -29,5 +30,10 @@ class Config
     public function getId(): string
     {
         return (string)$this->scopeConfig->getValue(self::XML_PATH_COOKIEBOT_ID);
+    }
+
+    public function getDataCulture(): string
+    {
+        return (string)$this->scopeConfig->getValue(self::XML_PATH_DATA_CULTURE);
     }
 }

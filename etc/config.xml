@@ -6,7 +6,7 @@
             <cookiebot>
                 <enabled>0</enabled>
                 <id/>
-                <data_culture />
+                <data_culture/>
             </cookiebot>
         </web>
     </default>

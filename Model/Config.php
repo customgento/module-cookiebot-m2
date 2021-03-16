@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace CustomGento\Cookiebot\Model;
@@ -10,7 +11,7 @@ class Config
 {
     public const XML_PATH_COOKIEBOT_ENABLED = 'web/cookiebot/enabled';
     public const XML_PATH_COOKIEBOT_ID = 'web/cookiebot/id';
-    public const XML_PATH_DATA_CULTURE  = 'web/cookiebot/data_culture';
+    public const XML_PATH_DATA_CULTURE = 'web/cookiebot/data_culture';
 
     /**
      * @var ScopeConfigInterface

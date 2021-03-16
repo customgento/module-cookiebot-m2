@@ -24,7 +24,6 @@ class ScriptGenerator
         $dataCulture = $this->config->getDataCulture() ?
             sprintf('data-culture="%s"', $this->config->getDataCulture()) : '';
 
-
         return sprintf(self::COOKIEBOT_SCRIPT_FORMAT, $cookiebotId, $dataCulture);
     }
 }

@@ -15,7 +15,7 @@
                         <field id="enabled">1</field>
                     </depends>
                 </field>
-                <field id="data_culture" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="data_culture" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Data Culture</label>
                     <depends>
                         <field id="enabled">1</field>

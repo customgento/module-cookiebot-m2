@@ -1,8 +1,5 @@
 # CustomGento_Cookiebot
-Magento 2 module, which integrates Cookiebot.
-
-## Description
-This extension adds the Cookiebot script to all pages.
+This Magento 2 module integrates Cookiebot into your store. This is useful to give the customer the possibility to block unwanted cookies and only allow wanted cookies. It requires an active Cookiebot subscription and can be completely configured in your Cookiebot account. 
 
 ## Installation
 - `composer require customgento/module-cookiebot-m2`

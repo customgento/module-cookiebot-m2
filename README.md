@@ -20,4 +20,4 @@ Unfortunately, Cookiebot currently does not support automatic blocking when Requ
 You need a [Cookiebot](https://www.cookiebot.com/) account, so that this extension does anything useful for you.
 
 ## Copyright
-&copy; 2020 CustomGento GmbH
+&copy; 2020 - present CustomGento GmbH

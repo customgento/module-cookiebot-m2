@@ -12,5 +12,10 @@
                 <value id="cookiebot" type="host">consentcdn.cookiebot.com</value>
             </values>
         </policy>
+        <policy id="connect-src">
+            <values>
+                <value id="cookiebot" type="host">consentcdn.cookiebot.com</value>
+            </values>
+        </policy>
     </policies>
 </csp_whitelist>

@@ -6,6 +6,7 @@ namespace CustomGento\Cookiebot\Test\Integration\Model;
 
 use CustomGento\Cookiebot\Model\Config;
 use CustomGento\Cookiebot\Model\ScriptGenerator;
+use Magento\Framework\App\ObjectManager;
 use Magento\TestFramework\ObjectManager as TestFrameworkObjectManager;
 use PHPUnit\Framework\TestCase;
 
@@ -20,7 +21,6 @@ class ScriptGeneratorTest extends TestCase
     {
         parent::setUp();
         $this->config = TestFrameworkObjectManager::getInstance()->create(Config::class);
-        $this->script = $this->_objectManager->create(ScriptGenerator::class)->generate();
     }
 
     public function testEuCdnEnabledReturnsFalseByDefault(): void
@@ -33,8 +33,9 @@ class ScriptGeneratorTest extends TestCase
      */
     public function testIsEuCdndReturnsFalse(): void
     {
-        $generatedScript = $this->_objectManager->create(ScriptGenerator::class)->generate();
-        self::assertEquals('<script id="Cookiebot" data-cfasync="false" src="https://consent.cookiebot.com/uc.js" data-cbid="%s" %s type="text/javascript" async></script>', $generatedScript);
+        $generatedScript = ObjectManager::getInstance()->create(ScriptGenerator::class)->generate();
+        self::assertEquals('<script id="Cookiebot" data-cfasync="false" src="https://consent.cookiebot.com/uc.js" data-cbid="%s" %s type="text/javascript" async></script>',
+            $generatedScript);
     }
 
     /**
@@ -42,7 +43,8 @@ class ScriptGeneratorTest extends TestCase
      */
     public function testIsEuCdndReturnsTrue(): void
     {
-        $generatedScript = $this->_objectManager->create(ScriptGenerator::class)->generate();
-        self::assertEquals('<script id="Cookiebot" data-cfasync="false" src="https://consent.cookiebot.eu/uc.js" data-cbid="%s" %s type="text/javascript" async></script>', $generatedScript);
+        $generatedScript = ObjectManager::getInstance()->create(ScriptGenerator::class)->generate();
+        self::assertEquals('<script id="Cookiebot" data-cfasync="false" src="https://consent.cookiebot.eu/uc.js" data-cbid="%s" %s type="text/javascript" async></script>',
+            $generatedScript);
     }
 }

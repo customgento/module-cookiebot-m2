@@ -23,15 +23,10 @@ class ScriptGeneratorTest extends TestCase
         $this->config = TestFrameworkObjectManager::getInstance()->create(Config::class);
     }
 
-    public function testEuCdnEnabledReturnsFalseByDefault(): void
-    {
-        self::assertFalse($this->config->isEuCdn());
-    }
-
     /**
-     * @magentoConfigFixture current_store web/cookiebot/is_eu_cdn 0
+     * @magentoConfigFixture current_store web/cookiebot/use_eu_cdn 0
      */
-    public function testIsEuCdndReturnsFalse(): void
+    public function testWhenUseEuCdnIsDisabled(): void
     {
         $generatedScript = ObjectManager::getInstance()->create(ScriptGenerator::class)->generate();
         self::assertEquals('<script id="Cookiebot" data-cfasync="false" src="https://consent.cookiebot.com/uc.js" data-cbid=""  type="text/javascript" async></script>',
@@ -39,9 +34,9 @@ class ScriptGeneratorTest extends TestCase
     }
 
     /**
-     * @magentoConfigFixture current_store web/cookiebot/is_eu_cdn 1
+     * @magentoConfigFixture current_store web/cookiebot/use_eu_cdn 1
      */
-    public function testIsEuCdndReturnsTrue(): void
+    public function testWhenUseEuCdnIsEnabled(): void
     {
         $generatedScript = ObjectManager::getInstance()->create(ScriptGenerator::class)->generate();
         self::assertEquals('<script id="Cookiebot" data-cfasync="false" src="https://consent.cookiebot.eu/uc.js" data-cbid=""  type="text/javascript" async></script>',

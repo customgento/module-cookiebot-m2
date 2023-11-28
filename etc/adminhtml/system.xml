@@ -21,7 +21,7 @@
                         <field id="enabled">1</field>
                     </depends>
                 </field>
-                <field id="is_eu_cdn" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="use_eu_cdn" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Use European CDN</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>

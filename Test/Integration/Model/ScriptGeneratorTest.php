@@ -29,22 +29,22 @@ class ScriptGeneratorTest extends TestCase
     }
 
     /**
-     * @magentoConfigFixture default/web/cookiebot/enabled_eu_cdn 0
+     * @magentoConfigFixture current_store web/cookiebot/is_eu_cdn 0
      */
     public function testIsEuCdndReturnsFalse(): void
     {
         $generatedScript = ObjectManager::getInstance()->create(ScriptGenerator::class)->generate();
-        self::assertEquals('<script id="Cookiebot" data-cfasync="false" src="https://consent.cookiebot.com/uc.js" data-cbid="%s" %s type="text/javascript" async></script>',
+        self::assertEquals('<script id="Cookiebot" data-cfasync="false" src="https://consent.cookiebot.com/uc.js" data-cbid=""  type="text/javascript" async></script>',
             $generatedScript);
     }
 
     /**
-     * @magentoConfigFixture default/web/cookiebot/enabled_eu_cdn 1
+     * @magentoConfigFixture current_store web/cookiebot/is_eu_cdn 1
      */
     public function testIsEuCdndReturnsTrue(): void
     {
         $generatedScript = ObjectManager::getInstance()->create(ScriptGenerator::class)->generate();
-        self::assertEquals('<script id="Cookiebot" data-cfasync="false" src="https://consent.cookiebot.eu/uc.js" data-cbid="%s" %s type="text/javascript" async></script>',
+        self::assertEquals('<script id="Cookiebot" data-cfasync="false" src="https://consent.cookiebot.eu/uc.js" data-cbid=""  type="text/javascript" async></script>',
             $generatedScript);
     }
 }

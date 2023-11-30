@@ -12,6 +12,7 @@ class Config
     public const XML_PATH_COOKIEBOT_ENABLED = 'web/cookiebot/enabled';
     public const XML_PATH_COOKIEBOT_ID = 'web/cookiebot/id';
     public const XML_PATH_DATA_CULTURE = 'web/cookiebot/data_culture';
+    public const XML_PATH_USE_EU_CDN = 'web/cookiebot/use_eu_cdn';
 
     /**
      * @var ScopeConfigInterface
@@ -36,5 +37,10 @@ class Config
     public function getDataCulture(): string
     {
         return (string)$this->scopeConfig->getValue(self::XML_PATH_DATA_CULTURE, ScopeInterface::SCOPE_STORE);
+    }
+
+    public function useEuCdn(): bool
+    {
+        return $this->scopeConfig->isSetFlag(self::XML_PATH_USE_EU_CDN, ScopeInterface::SCOPE_STORE);
     }
 }

@@ -7,6 +7,7 @@
                 <enabled>0</enabled>
                 <id/>
                 <data_culture/>
+                <use_eu_cdn>0</use_eu_cdn>
             </cookiebot>
         </web>
     </default>

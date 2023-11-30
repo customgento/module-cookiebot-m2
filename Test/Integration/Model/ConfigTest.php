@@ -39,7 +39,7 @@ class ConfigTest extends TestCase
     }
 
     /**
-     * @magentoConfigFixture default/web/cookiebot/enabled 1
+     * @magentoConfigFixture current_store web/cookiebot/enabled 1
      */
     public function testIsEnabledReturnsTrue(): void
     {
@@ -52,7 +52,7 @@ class ConfigTest extends TestCase
     }
 
     /**
-     * @magentoConfigFixture default/web/cookiebot/id 123-456-789
+     * @magentoConfigFixture current_store web/cookiebot/id 123-456-789
      */
     public function testGetIdReturnsId(): void
     {

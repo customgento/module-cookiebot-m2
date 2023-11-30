@@ -22,7 +22,7 @@ class AddScriptTest extends AbstractController
 
     /**
      * @magentoConfigFixture current_store web/cookiebot/enabled 1
-     * @magentoConfigFixture current_store cookiebot/id 123-456-789
+     * @magentoConfigFixture current_store web/cookiebot/id 123-456-789
      */
     public function testScriptAddedOnHomepage(): void
     {

@@ -26,20 +26,18 @@ class ScriptGeneratorTest extends TestCase
     /**
      * @magentoConfigFixture current_store web/cookiebot/use_eu_cdn 0
      */
-    public function testWhenUseEuCdnIsDisabled(): void
+    public function testDomainWhenUseEuCdnIsDisabled(): void
     {
         $generatedScript = ObjectManager::getInstance()->create(ScriptGenerator::class)->generate();
-        self::assertStringContainsString('https://consent.cookiebot.com/uc.js',
-            $generatedScript);
+        self::assertStringContainsString('https://consent.cookiebot.com/uc.js', $generatedScript);
     }
 
     /**
      * @magentoConfigFixture current_store web/cookiebot/use_eu_cdn 1
      */
-    public function testWhenUseEuCdnIsEnabled(): void
+    public function testDomainWhenUseEuCdnIsEnabled(): void
     {
         $generatedScript = ObjectManager::getInstance()->create(ScriptGenerator::class)->generate();
-        self::assertStringContainsString('https://consent.cookiebot.eu/uc.js',
-            $generatedScript);
+        self::assertStringContainsString('https://consent.cookiebot.eu/uc.js', $generatedScript);
     }
 }

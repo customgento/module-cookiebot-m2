@@ -74,5 +74,4 @@ class ConfigTest extends TestCase
     {
         self::assertTrue($this->config->useEuCdn());
     }
-
 }

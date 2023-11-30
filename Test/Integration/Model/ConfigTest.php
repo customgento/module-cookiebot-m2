@@ -20,11 +20,6 @@ class ConfigTest extends TestCase
         $this->config = TestFrameworkObjectManager::getInstance()->create(Config::class);
     }
 
-    public function testEuCdnEnabledReturnsFalseByDefault(): void
-    {
-        self::assertFalse($this->config->isEuCdn());
-    }
-
     public function testIsEnabledReturnsFalseByDefault(): void
     {
         self::assertFalse($this->config->isEnabled());
@@ -57,5 +52,10 @@ class ConfigTest extends TestCase
     public function testGetIdReturnsId(): void
     {
         self::assertEquals('123-456-789', $this->config->getId());
+    }
+
+    public function testEuCdnEnabledReturnsFalseByDefault(): void
+    {
+        self::assertFalse($this->config->useEuCdn());
     }
 }

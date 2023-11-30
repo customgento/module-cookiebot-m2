@@ -25,7 +25,7 @@ class ScriptGenerator
         $dataCulture = $this->config->getDataCulture() ?
             sprintf('data-culture="%s"', $this->config->getDataCulture()) : '';
 
-        if ($this->config->isEuCdn()) {
+        if ($this->config->useEuCdn()) {
             return sprintf(self::EU_COOKIEBOT_SCRIPT_FORMAT, $cookiebotId, $dataCulture);
         }
 

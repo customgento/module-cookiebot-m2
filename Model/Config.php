@@ -39,7 +39,7 @@ class Config
         return (string)$this->scopeConfig->getValue(self::XML_PATH_DATA_CULTURE, ScopeInterface::SCOPE_STORE);
     }
 
-    public function isEuCdn(): bool
+    public function useEuCdn(): bool
     {
         return $this->scopeConfig->isSetFlag(self::XML_PATH_USE_EU_CDN, ScopeInterface::SCOPE_STORE);
     }

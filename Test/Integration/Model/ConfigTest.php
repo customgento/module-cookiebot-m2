@@ -58,4 +58,21 @@ class ConfigTest extends TestCase
     {
         self::assertFalse($this->config->useEuCdn());
     }
+
+    /**
+     * @magentoConfigFixture current_store web/cookiebot/use_eu_cdn 0
+     */
+    public function testIfEuCdnEnabledConfigFunctionReturnsFalse(): void
+    {
+        self::assertFalse($this->config->useEuCdn());
+    }
+
+    /**
+     * @magentoConfigFixture current_store web/cookiebot/use_eu_cdn 1
+     */
+    public function testIfEuCdnEnabledConfigFunctionReturnsTrue(): void
+    {
+        self::assertTrue($this->config->useEuCdn());
+    }
+
 }

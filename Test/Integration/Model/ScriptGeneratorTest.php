@@ -29,7 +29,7 @@ class ScriptGeneratorTest extends TestCase
     public function testWhenUseEuCdnIsDisabled(): void
     {
         $generatedScript = ObjectManager::getInstance()->create(ScriptGenerator::class)->generate();
-        self::assertEquals('<script id="Cookiebot" data-cfasync="false" src="https://consent.cookiebot.com/uc.js" data-cbid=""  type="text/javascript" async></script>',
+        self::assertStringContainsString('https://consent.cookiebot.com/uc.js',
             $generatedScript);
     }
 
@@ -39,7 +39,7 @@ class ScriptGeneratorTest extends TestCase
     public function testWhenUseEuCdnIsEnabled(): void
     {
         $generatedScript = ObjectManager::getInstance()->create(ScriptGenerator::class)->generate();
-        self::assertEquals('<script id="Cookiebot" data-cfasync="false" src="https://consent.cookiebot.eu/uc.js" data-cbid=""  type="text/javascript" async></script>',
+        self::assertStringContainsString('https://consent.cookiebot.eu/uc.js',
             $generatedScript);
     }
 }

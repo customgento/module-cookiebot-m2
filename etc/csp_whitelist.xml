@@ -19,7 +19,6 @@
                 <value id="cookiebot" type="host">consentcdn.cookiebot.com</value>
                 <value id="cookiebot-eu" type="host">consentcdn.cookiebot.eu</value>
             </values>
-
         </policy>
     </policies>
 </csp_whitelist>

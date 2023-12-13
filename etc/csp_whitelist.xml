@@ -5,7 +5,7 @@
         <policy id="script-src">
             <values>
                 <value id="cookiebot" type="host">consent.cookiebot.com</value>
-                <value id="cookiebot-eu" type="host">consent.cookiebot.eu</value>
+                <value id="cookiebot_eu" type="host">consent.cookiebot.eu</value>
             </values>
         </policy>
         <policy id="frame-src">
@@ -17,7 +17,7 @@
         <policy id="connect-src">
             <values>
                 <value id="cookiebot" type="host">consentcdn.cookiebot.com</value>
-                <value id="cookiebot-eu" type="host">consentcdn.cookiebot.eu</value>
+                <value id="cookiebot_eu" type="host">consentcdn.cookiebot.eu</value>
             </values>
         </policy>
     </policies>

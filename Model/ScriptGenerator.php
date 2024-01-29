@@ -6,10 +6,22 @@ namespace CustomGento\Cookiebot\Model;
 
 class ScriptGenerator
 {
-    private const COOKIEBOT_SCRIPT_FORMAT =
-        '<script id="Cookiebot" data-cfasync="false" src="https://consent.cookiebot.com/uc.js" data-cbid="%s" %s type="text/javascript" async></script>';
-    private const EU_COOKIEBOT_SCRIPT_FORMAT =
-        '<script id="Cookiebot" data-cfasync="false" src="https://consent.cookiebot.eu/uc.js" data-cbid="%s" %s type="text/javascript" async></script>';
+    private const COOKIEBOT_SCRIPT_FORMAT
+        = '<script
+            id="Cookiebot"
+            data-cfasync="false"
+            src="https://consent.cookiebot.com/uc.js"
+            data-cbid="%s"
+            %s
+            type="text/javascript" async></script>';
+    private const EU_COOKIEBOT_SCRIPT_FORMAT
+        = '<script
+            id="Cookiebot"
+            data-cfasync="false"
+            src="https://consent.cookiebot.eu/uc.js"
+            data-cbid="%s"
+            %s
+            type="text/javascript" async></script>';
 
     /**
      * @var Config

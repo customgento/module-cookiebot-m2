@@ -31,6 +31,14 @@ jobs:
           ce_version: '2.4.4-p6'
           composer_version: '2'
       - uses: actions/checkout@v4
+      - name: M2 Integration Tests with Magento 2 Version 2.4.4-p6 (PHP 7.4)
+        uses: extdn/github-actions-m2/magento-integration-tests/7.4@master
+        with:
+          module_name: CustomGento_Cookiebot
+          composer_name: customgento/module-cookiebot-m2
+          ce_version: '2.4.4-p6'
+          composer_version: '2'
+      - uses: actions/checkout@v4
       - name: M2 Integration Tests with Magento 2 Version 2.4.4-p5 (PHP 7.4)
         uses: extdn/github-actions-m2/magento-integration-tests/7.4@master
         with:
@@ -97,6 +105,14 @@ jobs:
       - uses: actions/checkout@v4
       - name: M2 Integration Tests with Magento 2 Version 2.4.6-p2 (PHP 8.2)
         uses: extdn/github-actions-m2/magento-integration-tests/8.2@master
+        with:
+          module_name: CustomGento_Cookiebot
+          composer_name: customgento/module-cookiebot-m2
+          ce_version: '2.4.6-p2'
+          composer_version: '2'
+      - uses: actions/checkout@v4
+      - name: M2 Integration Tests with Magento 2 Version 2.4.6-p2 (PHP 8.1)
+        uses: extdn/github-actions-m2/magento-integration-tests/8.1@master
         with:
           module_name: CustomGento_Cookiebot
           composer_name: customgento/module-cookiebot-m2

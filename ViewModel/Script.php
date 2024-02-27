@@ -34,4 +34,9 @@ class Script implements ArgumentInterface
 
         return $this->scriptGenerator->generate();
     }
+
+    public function googleConsentIsEnabled(): bool
+    {
+        return $this->config->googleConsentIsEnabled();
+    }
 }

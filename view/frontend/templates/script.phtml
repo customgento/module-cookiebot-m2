@@ -1,9 +1,9 @@
 <?php /** @var Magento\Framework\View\Element\Template $block */ ?>
 <?php /** @var CustomGento\Cookiebot\ViewModel\Script $viewModel */ ?>
 <?php $viewModel = $block->getData('view_model') ?>
-<?php
-echo /* @noEscape */ $viewModel->getScript();
+<?= /* @noEscape */ $viewModel->getScript() ?>
 
+<?php
 if ($viewModel->googleConsentIsEnabled()):
     ?>
     <script data-cookieconsent="ignore">

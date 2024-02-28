@@ -13,7 +13,7 @@ class Config
     public const XML_PATH_COOKIEBOT_ID = 'web/cookiebot/id';
     public const XML_PATH_DATA_CULTURE = 'web/cookiebot/data_culture';
     public const XML_PATH_USE_EU_CDN = 'web/cookiebot/use_eu_cdn';
-    public const XML_PATH_GOOGLE_CONSENT = 'web/cookiebot/google_consent';
+    public const XML_PATH_USE_GOOGLE_CONSENT_MODE = 'web/cookiebot/use_google_consent_mode';
 
     /**
      * @var ScopeConfigInterface
@@ -45,8 +45,8 @@ class Config
         return $this->scopeConfig->isSetFlag(self::XML_PATH_USE_EU_CDN, ScopeInterface::SCOPE_STORE);
     }
 
-    public function googleConsentIsEnabled(): bool
+    public function isGoogleConsentModeEnabled(): bool
     {
-        return $this->scopeConfig->isSetFlag(self::XML_PATH_GOOGLE_CONSENT, ScopeInterface::SCOPE_STORE);
+        return $this->scopeConfig->isSetFlag(self::XML_PATH_USE_GOOGLE_CONSENT_MODE, ScopeInterface::SCOPE_STORE);
     }
 }

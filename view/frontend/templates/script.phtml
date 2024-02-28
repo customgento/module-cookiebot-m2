@@ -4,7 +4,7 @@
 <?= /* @noEscape */ $viewModel->getScript() ?>
 
 <?php
-if ($viewModel->googleConsentIsEnabled()):
+if ($viewModel->isGoogleConsentModeEnabled()):
     ?>
     <script data-cookieconsent="ignore">
         window.dataLayer = window.dataLayer || [];

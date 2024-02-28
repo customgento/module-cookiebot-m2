@@ -8,7 +8,7 @@
                 <id/>
                 <data_culture/>
                 <use_eu_cdn>0</use_eu_cdn>
-                <google_consent>1</google_consent>
+                <use_google_consent_mode>1</use_google_consent_mode>
             </cookiebot>
         </web>
     </default>

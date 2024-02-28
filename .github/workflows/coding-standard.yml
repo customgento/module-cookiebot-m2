@@ -3,7 +3,7 @@ on: [push, pull_request]
 
 jobs:
   call-workflow-passing-data:
-    uses: octo-org/example-repo/.github/workflows/coding-standard.yml@master
+    uses: customgento/general-github-actions/.github/workflows/coding-standard.yml@master
     with:
       config-path: .github/labeler.yml
     secrets: inherit

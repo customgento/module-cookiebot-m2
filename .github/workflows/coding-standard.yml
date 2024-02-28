@@ -2,9 +2,8 @@ name: ExtDN M2 Coding Standard
 on: [push, pull_request]
 
 jobs:
-  static:
-    name: M2 Coding Standard
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: extdn/github-actions-m2/magento-coding-standard@master
+  call-workflow-passing-data:
+    uses: octo-org/example-repo/.github/workflows/coding-standard.yml@master
+    with:
+      config-path: .github/labeler.yml
+    secrets: inherit

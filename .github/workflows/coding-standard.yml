@@ -1,9 +1,10 @@
 name: ExtDN M2 Coding Standard
 on: [push, pull_request]
 
+
 jobs:
   call-workflow-passing-data:
-    uses: customgento/general-github-actions/.github/workflows/coding-standard.yml@master
+    uses: customgento/general-github-actions/.github/workflows/coding-standard.yml@main
     with:
       config-path: .github/labeler.yml
     secrets: inherit

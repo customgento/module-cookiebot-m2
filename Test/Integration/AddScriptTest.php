@@ -31,6 +31,16 @@ class AddScriptTest extends AbstractController
     }
 
     /**
+     * @magentoConfigFixture current_store web/cookiebot/use_google_consent_mode 1
+     * @magentoConfigFixture current_store web/cookiebot/id 123-456-789
+     */
+    public function testGoogleConsentScriptAddedOnHomepage(): void
+    {
+        $this->dispatch('/');
+        self::assertStringContainsString('gtag("set", "ads_data_redaction", true);', $this->getResponse()->getBody());
+    }
+
+    /**
      * @magentoDataFixture   Magento/Catalog/_files/product_simple.php
      * @magentoConfigFixture current_store web/cookiebot/enabled 1
      * @magentoConfigFixture current_store web/cookiebot/id 123-456-789

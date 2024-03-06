@@ -4,4 +4,3 @@ on: [push, pull_request]
 jobs:
   phpmd:
     uses: customgento/m2-github-actions/.github/workflows/mess-detector.yml@main
-    secrets: inherit

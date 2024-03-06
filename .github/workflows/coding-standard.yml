@@ -4,4 +4,3 @@ on: [push, pull_request]
 jobs:
   phpcs:
     uses: customgento/m2-github-actions/.github/workflows/coding-standard.yml@main
-    secrets: inherit

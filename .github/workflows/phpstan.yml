@@ -4,4 +4,3 @@ on: [push, pull_request]
 jobs:
   phpstan:
     uses: customgento/m2-github-actions/.github/workflows/phpstan.yml@main
-    secrets: inherit

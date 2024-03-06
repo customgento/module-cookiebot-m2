@@ -2,6 +2,6 @@ name: ExtDN M2 Mess Detector
 on: [push, pull_request]
 
 jobs:
-  call-workflow-passing-data:
+  phpmd:
     uses: customgento/general-github-actions/.github/workflows/mess-detector.yml@main
     secrets: inherit

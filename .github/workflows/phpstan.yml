@@ -3,10 +3,4 @@ on: [push, pull_request]
 
 jobs:
   phpstan:
-    name: M2 PHPStan
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: extdn/github-actions-m2/magento-phpstan/8.2@master
-        with:
-          composer_name: customgento/module-cookiebot-m2
+    uses: customgento/m2-github-actions/.github/workflows/phpstan.yml@main

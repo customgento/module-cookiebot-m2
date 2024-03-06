@@ -1,4 +1,4 @@
-name: ExtDN M2 Coding Standard
+name: ExtDN M2 Mess Detector
 on: [push, pull_request]
 
 jobs:

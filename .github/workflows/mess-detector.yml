@@ -1,10 +1,7 @@
-name: ExtDN M2 Mess Detector
+name: ExtDN M2 Coding Standard
 on: [push, pull_request]
 
 jobs:
-  phpmd:
-    name: M2 Mess Detector
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: extdn/github-actions-m2/magento-mess-detector@master
+  call-workflow-passing-data:
+    uses: customgento/general-github-actions/.github/workflows/mess-detector.yml@main
+    secrets: inherit

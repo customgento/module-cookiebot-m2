@@ -4,3 +4,6 @@ on: [push, pull_request]
 jobs:
   integration:
     uses: customgento/m2-github-actions/.github/workflows/integration.yml@main
+    with:
+      module_name: CustomGento_ChildProductData
+      composer_name: customgento/module-child-product-data

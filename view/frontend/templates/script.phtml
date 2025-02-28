@@ -1,12 +1,19 @@
-<?php /** @var Magento\Framework\View\Element\Template $block */ ?>
-<?php /** @var CustomGento\Cookiebot\ViewModel\Script $viewModel */ ?>
-<?php $viewModel = $block->getData('view_model') ?>
-<?= /* @noEscape */ $viewModel->getScript() ?>
-
 <?php
-if ($viewModel->isGoogleConsentModeEnabled()):
-    ?>
-    <script data-cookieconsent="ignore">
+    use CustomGento\Cookiebot\ViewModel\Script as CookiebotScriptViewModel;
+    use Magento\Framework\View\Element\Template;
+    use Magento\Framework\View\Helper\SecureHtmlRenderer;
+
+    /** @var CookiebotScriptViewModel $viewModel */
+    /** @var SecureHtmlRenderer $secureRenderer */
+    /** @var Template $block */
+
+    $viewModel = $block->getData('view_model')
+?>
+<?= /* @noEscape */ $viewModel->getScript() ?>
+<?php
+
+if ($viewModel->isGoogleConsentModeEnabled()) {
+    $scriptString = '
         window.dataLayer = window.dataLayer || [];
 
         function gtag() {
@@ -25,5 +32,12 @@ if ($viewModel->isGoogleConsentModeEnabled()):
         });
         gtag("set", "ads_data_redaction", true);
         gtag("set", "url_passthrough", true);
-    </script>
-<?php endif; ?>
+    ';
+
+    // checking on if SecureHtmlRenderer exists first, because this module is still compatible with Magento 2.3.x which doesn't include this class
+    if (class_exists(SecureHtmlRenderer::class)) {
+        echo $secureRenderer->renderTag('script', ['data-cookieconsent' => 'ignore'], $scriptString, false);
+    } else {
+        echo '<script data-cookieconsent="ignore">' . $scriptString . '<script>';
+    }
+}

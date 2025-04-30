@@ -1,0 +1,112 @@
+<?php
+
+use Magento\Framework\View\Helper\SecureHtmlRenderer;
+
+/** @var SecureHtmlRenderer $secureRenderer */
+
+$addRequiredAttributesScript = '
+document.addEventListener("DOMContentLoaded", function() {
+    const videoIframes = document.querySelectorAll(".pagebuilder-video-container iframe");
+    
+    videoIframes.forEach((iframe) => {
+        if (!Cookiebot?.consent?.marketing) {
+            iframe.setAttribute("data-cookieblock-src", iframe.src);
+            iframe.setAttribute("data-cookieconsent", "marketing");
+            iframe.removeAttribute("src");
+            iframe.closest("[data-content-type=\"video\"]").setAttribute("data-content-type", "image");
+        }
+    });
+});
+
+addEventListener("CookiebotOnAccept", () => {
+    const videoIframes = document.querySelectorAll(".pagebuilder-video-container iframe");
+    
+    videoIframes.forEach((iframe) => {
+        if (Cookiebot?.consent?.marketing) {
+            if (iframe.closest("[data-content-type=\"image\"]")) {
+                iframe.closest("[data-content-type=\"image\"]").setAttribute("data-content-type", "video");
+            }
+        }
+    });
+});
+
+addEventListener("CookiebotOnDecline", () => {
+    const videoIframes = document.querySelectorAll(".pagebuilder-video-container iframe");
+    
+    videoIframes.forEach((iframe) => {
+        if (!Cookiebot?.consent?.marketing) {
+            if (iframe.closest("[data-content-type=\"video\"]")) {
+                iframe.closest("[data-content-type=\"video\"]").setAttribute("data-content-type", "image");
+            }
+        }
+    });
+});
+';
+
+$placeholderScript = '
+document.addEventListener("DOMContentLoaded", function() {
+    ((document, selector, consentType) => {
+        const createTextNode = text => document.createTextNode(text);
+        const createElement = element => document.createElement(element);
+        console.log("here");
+        document.querySelectorAll(selector).forEach(iframe => {
+            const linkElement = createElement("a");
+            const divElement = createElement("div");
+            const paragraphElement = createElement("p");
+            const iframeSrc = iframe.dataset.cookieblockSrc;
+            
+            // Detect service provider type
+            const serviceProvider = 
+                /google\.com\/maps\/embed/.test(iframeSrc) ? "Google Maps" :
+                /player\.vimeo\.com\/video\//.test(iframeSrc) ? "Vimeo" :
+                /youtube(-nocookie)?\.com\/embed\//.test(iframeSrc) ? "YouTube" : 
+                undefined;
+            
+            if (!serviceProvider) {
+                return;
+            }
+            
+            const iframeHeight = iframe.getBoundingClientRect().height;
+            const iframeWidth = iframe.getBoundingClientRect().width;
+            
+            // Create placeholder content
+            divElement.innerHTML = `
+                <div style="background-color:#CCC;display:inline-block;height:${iframeHeight}px;position:relative;width:${iframeWidth}px;">
+                    <div style="background-color:#848484;border-radius:15px;height:50%;position:absolute;transform:translate(50%,50%);width:50%;">
+                        <p style="color:#FFF;font-size:7.5em;position:relative;top:50%;left:50%;margin:0;text-align:center;transform:translate(-50%,-50%);">&ctdot;</p>
+                    </div>
+                </div>
+            `;
+            
+            // Setup consent message and button
+            divElement.classList.add(`cookieconsent-optout-${consentType}`);
+            linkElement.textContent = `accept ${consentType} cookies`;
+            linkElement.href = "javascript:Cookiebot.renew()";
+            paragraphElement.append(
+                createTextNode("Please "), 
+                linkElement, 
+                createTextNode(` to view this ${serviceProvider} content.`)
+            );
+            
+            divElement.append(paragraphElement);
+            iframe.parentNode.insertBefore(divElement, iframe);
+        });
+    })(document, "iframe[data-cookieblock-src]", "marketing");
+});
+';
+
+// Render scripts with secure renderer
+echo $secureRenderer->renderTag(
+    'script',
+    ['type' => 'text/javascript', 'data-cookieconsent' => 'ignore'],
+    $addRequiredAttributesScript,
+    false
+);
+
+echo $secureRenderer->renderTag(
+    'script',
+    ['type' => 'text/javascript', 'data-cookieconsent' => 'ignore'],
+    $placeholderScript,
+    false
+);
+?>

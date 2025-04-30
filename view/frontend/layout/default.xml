@@ -8,5 +8,8 @@
                 </arguments>
             </block>
         </referenceBlock>
+        <referenceContainer name="before.body.end">
+            <block name="customgento.cookiebot.iframe.handler" template="CustomGento_Cookiebot::iframe-handler.phtml" />
+        </referenceContainer>
     </body>
 </page>

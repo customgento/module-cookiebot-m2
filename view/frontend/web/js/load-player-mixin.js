@@ -8,8 +8,8 @@ define([
             .forEach(e=>{const a=ce('a'),div=ce('div'),p=ce('p'),s=e.dataset.cookieblockSrc,sp=
                 /google\.com\/maps\/embed/.test(s)?'Google Maps':/player\.vimeo\.com\/video\//
                     .test(s)?'Vimeo':/youtube(-nocookie)?\.com\/embed\//.test(s)?'YouTube':undefined;
-                if(!sp)return;div.innerHTML=`<div style="background-color:#CCC;display:inline-`+
-                    `block;height:${e.height}px;position:relative;width:${e.width}px;"><div style=`+
+                if(!sp)return;div.innerHTML=`<div style="background-color:#CCC;z-index:9999;display:inline-`+
+                    `block;height:${e.getBoundingClientRect().height}px;position:relative;width:${e.getBoundingClientRect().width}px;"><div style=`+
                     '"background-color:#848484;border-radius:15px;height:50%;position:absolute;'+
                     'transform:translate(50%,50%);width:50%;"><p style="color:#FFF;font-size:7.5em;'+
                     'position:relative;top:50%;left:50%;margin:0;text-align:center;transform:translate'
@@ -58,6 +58,7 @@ define([
                             host: host,
                             events: {
                                 'onReady': function onPlayerReady() {
+                                    console.log('onReady - can be used for youtube')
                                     self._player.getDuration();
                                     self.element.closest('.fotorama__stage__frame')
                                         .addClass('fotorama__product-video--loaded');

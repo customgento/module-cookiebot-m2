@@ -20,6 +20,7 @@ define([
     }
 
     return function (originalWidget) {
+        var blockVideosUntilConsent = window.cookiebotConfig && window.cookiebotConfig.blockVideosUntilConsent;
 
         $.widget('mage.videoYoutube', $.mage.videoYoutube, {
             _create: function () {
@@ -63,17 +64,19 @@ define([
                                     self.element.closest('.fotorama__stage__frame')
                                         .addClass('fotorama__product-video--loaded');
 
-                                    // Add Cookiebot integration
-                                    const iframes = document.querySelectorAll('.product-video[data-type="youtube"] iframe');
-                                    iframes.forEach((iframe) => {
-                                        if (!Cookiebot.consent.marketing) {
-                                            iframe.setAttribute('data-cookieblock-src', iframe.src);
-                                            iframe.setAttribute('data-cookieconsent', 'marketing');
-                                            iframe.removeAttribute('src');
-                                        }
-                                    });
+                                    // Add Cookiebot integration only if configured
+                                    if (blockVideosUntilConsent) {
+                                        const iframes = document.querySelectorAll('.product-video[data-type="youtube"] iframe');
+                                        iframes.forEach((iframe) => {
+                                            if (!Cookiebot.consent.marketing) {
+                                                iframe.setAttribute('data-cookieblock-src', iframe.src);
+                                                iframe.setAttribute('data-cookieconsent', 'marketing');
+                                                iframe.removeAttribute('src');
+                                            }
+                                        });
 
-                                    createCookiebotPlaceholders();
+                                        createCookiebotPlaceholders();
+                                    }
                                 },
                                 onStateChange: function (data) {
                                     switch (window.parseInt(data.data, 10)) {
@@ -124,21 +127,28 @@ define([
                     timestamp +
                     additionalParams;
                 id = 'vimeo' + this._code + timestamp;
-                this.element.append(
-                    $('<iframe></iframe>')
-                        .attr('frameborder', 0)
-                        .attr('id', id)
-                        .attr('width', this._width)
-                        .attr('height', this._height)
-                        .attr('src', src)
-                        .attr('data-cookieblock-src', src)
-                        .attr('data-cookieconsent', 'marketing')
-                        .attr('webkitallowfullscreen', '')
-                        .attr('mozallowfullscreen', '')
-                        .attr('allowfullscreen', '')
-                        .attr('referrerPolicy', 'origin')
-                        .attr('allow', 'autoplay')
-                );
+
+                var iframeAttrs = {
+                    'frameborder': 0,
+                    'id': id,
+                    'width': this._width,
+                    'height': this._height,
+                    'src': src,
+                    'webkitallowfullscreen': '',
+                    'mozallowfullscreen': '',
+                    'allowfullscreen': '',
+                    'referrerPolicy': 'origin',
+                    'allow': 'autoplay'
+                };
+
+                // Only add Cookiebot attributes if configured
+                if (blockVideosUntilConsent) {
+                    iframeAttrs['data-cookieblock-src'] = src;
+                    iframeAttrs['data-cookieconsent'] = 'marketing';
+                }
+
+                var $iframe = $('<iframe></iframe>').attr(iframeAttrs);
+                this.element.append($iframe);
 
                 /* eslint-disable no-undef */
                 this._player = new Vimeo.Player(this.element.children(':first')[0]);
@@ -146,18 +156,20 @@ define([
                 this._player.ready().then(function () {
                     $('#' + id).closest('.fotorama__stage__frame').addClass('fotorama__product-video--loaded');
                     
-                    // Add Cookiebot integration
-                    const iframes = document.querySelectorAll('.product-video[data-type="vimeo"] iframe');
+                    // Add Cookiebot integration only if configured
+                    if (blockVideosUntilConsent) {
+                        const iframes = document.querySelectorAll('.product-video[data-type="vimeo"] iframe');
 
-                    iframes.forEach((iframe) => {
-                        if (!Cookiebot.consent.marketing) {
-                            iframe.setAttribute('data-cookieblock-src', iframe.src);
-                            iframe.setAttribute('data-cookieconsent', 'marketing');
-                            iframe.removeAttribute('src');
-                        }
-                    });
+                        iframes.forEach((iframe) => {
+                            if (!Cookiebot.consent.marketing) {
+                                iframe.setAttribute('data-cookieblock-src', iframe.src);
+                                iframe.setAttribute('data-cookieconsent', 'marketing');
+                                iframe.removeAttribute('src');
+                            }
+                        });
 
-                    createCookiebotPlaceholders();
+                        createCookiebotPlaceholders();
+                    }
                 });
             }
         });

@@ -14,6 +14,7 @@ class Config
     public const XML_PATH_DATA_CULTURE = 'web/cookiebot/data_culture';
     public const XML_PATH_USE_EU_CDN = 'web/cookiebot/use_eu_cdn';
     public const XML_PATH_USE_GOOGLE_CONSENT_MODE = 'web/cookiebot/use_google_consent_mode';
+    public const XML_PATH_BLOCK_VIDEOS_UNTIL_CONSENT = 'web/cookiebot/block_videos_until_consent';
 
     /**
      * @var ScopeConfigInterface
@@ -48,5 +49,10 @@ class Config
     public function isGoogleConsentModeEnabled(): bool
     {
         return $this->scopeConfig->isSetFlag(self::XML_PATH_USE_GOOGLE_CONSENT_MODE, ScopeInterface::SCOPE_STORE);
+    }
+
+    public function isBlockVideosUntilConsentEnabled(): bool
+    {
+        return $this->scopeConfig->isSetFlag(self::XML_PATH_BLOCK_VIDEOS_UNTIL_CONSENT, ScopeInterface::SCOPE_STORE);
     }
 }

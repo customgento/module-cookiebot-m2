@@ -39,4 +39,9 @@ class Script implements ArgumentInterface
     {
         return $this->config->isGoogleConsentModeEnabled();
     }
+
+    public function isBlockVideosUntilConsentEnabled(): bool
+    {
+        return $this->config->isBlockVideosUntilConsentEnabled();
+    }
 }

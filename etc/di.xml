@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\PageBuilder\Model\Filter\Template">
+        <plugin name="customgento_cookiebot_pagebuilder_template_filter_plugin" type="CustomGento\Cookiebot\Plugin\PageBuilder\Model\Filter\TemplatePlugin" sortOrder="10"/>
+    </type>
+</config> 

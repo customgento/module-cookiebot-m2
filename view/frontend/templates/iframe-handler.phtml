@@ -53,7 +53,7 @@ if ($viewModel && $viewModel->isBlockVideosUntilConsentEnabled()) {
         ((document, selector, consentType) => {
             const createTextNode = text => document.createTextNode(text);
             const createElement = element => document.createElement(element);
-            console.log("here");
+            
             document.querySelectorAll(selector).forEach(iframe => {
                 const linkElement = createElement("a");
                 const divElement = createElement("div");
@@ -93,6 +93,7 @@ if ($viewModel && $viewModel->isBlockVideosUntilConsentEnabled()) {
                     createTextNode(` to view this ${serviceProvider} content.`)
                 );
                 
+                divElement.style.fontSize = "1.4rem";
                 divElement.append(paragraphElement);
                 iframe.parentNode.insertBefore(divElement, iframe);
             });
@@ -100,13 +101,19 @@ if ($viewModel && $viewModel->isBlockVideosUntilConsentEnabled()) {
     });
     ';
 
+    $newScript = '
+        document.addEventListener("DOMContentLoaded", function() {
+            alert("test");
+        })
+    ';
+
     // Render scripts with secure renderer
-    echo $secureRenderer->renderTag(
-        'script',
-        ['type' => 'text/javascript', 'data-cookieconsent' => 'ignore'],
-        $addRequiredAttributesScript,
-        false
-    );
+//    echo $secureRenderer->renderTag(
+//        'script',
+//        ['type' => 'text/javascript', 'data-cookieconsent' => 'ignore'],
+//        $addRequiredAttributesScript,
+//        false
+//    );
 
     echo $secureRenderer->renderTag(
         'script',
@@ -116,3 +123,10 @@ if ($viewModel && $viewModel->isBlockVideosUntilConsentEnabled()) {
     );
 }
 ?>
+
+<!--<script>-->
+<!--    document.addEventListener("DOMContentLoaded", function() {-->
+<!--        const gallery = document.querySelector('.fotorama__wrap .fotorama__stage');-->
+<!--        gallery.classList.add('fotorama-video-container');-->
+<!--    }-->
+<!--</script>-->

@@ -27,11 +27,10 @@ class ExternalVideoReplacer
                 if (preg_match('/data-cookieconsent=["\'][^"\']*["\']/', $beforeSrc . $afterSrc)) {
                     // If data-cookieconsent already exists, just change src to data-cookieblock-src
                     return '<iframe' . $beforeSrc . ' data-cookieblock-src="' . $iframeUrl . '"' . $afterSrc . '>';
-                } else {
-                    // Add data-cookieconsent="marketing" and change src to data-cookieblock-src
-                    return '<iframe' . $beforeSrc . ' data-cookieblock-src="' . $iframeUrl
-                        . '" data-cookieconsent="marketing"' . $afterSrc . '>';
                 }
+
+                return '<iframe' . $beforeSrc . ' data-cookieblock-src="' . $iframeUrl
+                    . '" data-cookieconsent="marketing"' . $afterSrc . '>';
             }, $content);
         }
 

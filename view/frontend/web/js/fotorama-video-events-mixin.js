@@ -8,7 +8,7 @@ define([
 
             _clickHandler: function (e) {
                 const blockVideoConsentConfig = window.cookiebotConfig && window.cookiebotConfig.blockVideosUntilConsent;
-                console.log('blockVideoConsentConfig', blockVideoConsentConfig);
+
                 if (!Cookiebot?.consent?.marketing && blockVideoConsentConfig) {
                     const videoElement = event.target.querySelector('.product-video');
                     if (!Cookiebot?.consent?.marketing) {
@@ -42,11 +42,8 @@ define([
                             document.createTextNode(' to view this content.')
                         );
 
-                        // Insert the placeholder before the video element
                         divElement.style.fontSize = "1.4rem";
-                        console.log('paragraphElement', paragraphElement);
                         divElement.append(paragraphElement);
-                        console.log('divElement', divElement);
                         paragraphElement.style.zIndex = "1000";
                         paragraphElement.style.position = "relative";
                         videoElement.parentNode.insertBefore(divElement, videoElement);

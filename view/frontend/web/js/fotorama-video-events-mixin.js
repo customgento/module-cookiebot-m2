@@ -12,8 +12,6 @@ define([
                 if (!Cookiebot?.consent?.marketing && blockVideoConsentConfig) {
                     const videoElement = event.target.querySelector('.product-video');
                     if (!Cookiebot?.consent?.marketing) {
-                        // Add placeholder before each video element
-                        // videoElements.forEach(function(videoElement) {
                         if (Cookiebot?.consent?.marketing) {
                             return;
                         }
@@ -47,8 +45,6 @@ define([
                         paragraphElement.style.zIndex = "1000";
                         paragraphElement.style.position = "relative";
                         videoElement.parentNode.insertBefore(divElement, videoElement);
-                        // });
-
                         return;
                     } else {
 

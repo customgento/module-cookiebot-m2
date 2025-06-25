@@ -11,23 +11,13 @@ use Magento\PageBuilder\Model\Filter\Template;
 class TemplatePlugin
 {
     /**
-     * @var Config
-     */
-    private $config;
-
-    /**
-     * @var ExternalVideoReplacer
-     */
-    private $externalVideoReplacer;
-
-    /**
      * @param Config                $config
      * @param ExternalVideoReplacer $externalVideoReplacer
      */
-    public function __construct(Config $config, ExternalVideoReplacer $externalVideoReplacer)
-    {
-        $this->config                = $config;
-        $this->externalVideoReplacer = $externalVideoReplacer;
+    public function __construct(
+        private readonly Config $config,
+        private readonly ExternalVideoReplacer $externalVideoReplacer
+    ) {
     }
 
     /**

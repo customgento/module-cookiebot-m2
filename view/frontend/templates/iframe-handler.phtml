@@ -9,45 +9,6 @@ $viewModel = $block->getData('view_model');
 
 // Only add scripts if video blocking is enabled
 if ($viewModel && $viewModel->isBlockVideosUntilConsentEnabled()) {
-    $addRequiredAttributesScript = '
-    document.addEventListener("DOMContentLoaded", function() {
-        const videoIframes = document.querySelectorAll(".pagebuilder-video-container iframe");
-        
-        videoIframes.forEach((iframe) => {
-            if (!Cookiebot?.consent?.marketing) {
-                iframe.setAttribute("data-cookieblock-src", iframe.src);
-                iframe.setAttribute("data-cookieconsent", "marketing");
-                iframe.removeAttribute("src");
-                iframe.closest("[data-content-type=\"video\"]").setAttribute("data-content-type", "image");
-            }
-        });
-    });
-
-    addEventListener("CookiebotOnAccept", () => {
-        const videoIframes = document.querySelectorAll(".pagebuilder-video-container iframe");
-        
-        videoIframes.forEach((iframe) => {
-            if (Cookiebot?.consent?.marketing) {
-                if (iframe.closest("[data-content-type=\"image\"]")) {
-                    iframe.closest("[data-content-type=\"image\"]").setAttribute("data-content-type", "video");
-                }
-            }
-        });
-    });
-
-    addEventListener("CookiebotOnDecline", () => {
-        const videoIframes = document.querySelectorAll(".pagebuilder-video-container iframe");
-        
-        videoIframes.forEach((iframe) => {
-            if (!Cookiebot?.consent?.marketing) {
-                if (iframe.closest("[data-content-type=\"video\"]")) {
-                    iframe.closest("[data-content-type=\"video\"]").setAttribute("data-content-type", "image");
-                }
-            }
-        });
-    });
-    ';
-
     $placeholderScript = '
     document.addEventListener("DOMContentLoaded", function() {
         ((document, selector, consentType) => {

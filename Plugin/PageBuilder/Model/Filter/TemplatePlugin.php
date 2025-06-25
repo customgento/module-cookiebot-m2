@@ -10,19 +10,12 @@ use Magento\PageBuilder\Model\Filter\Template;
 
 class TemplatePlugin
 {
-    /**
-     * @param Config                $config
-     * @param ExternalVideoReplacer $externalVideoReplacer
-     */
     public function __construct(
         private readonly Config $config,
         private readonly ExternalVideoReplacer $externalVideoReplacer
     ) {
     }
 
-    /**
-     * Replace YouTube iframe sources for page builder templates
-     */
     public function afterFilter(Template $subject, string $result): string
     {
         // Only process if the block_videos_until_consent feature is enabled

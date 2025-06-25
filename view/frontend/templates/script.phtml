@@ -4,13 +4,14 @@ use CustomGento\Cookiebot\ViewModel\Script as CookiebotScriptViewModel;
 use Magento\Framework\View\Element\Template;
 use Magento\Framework\View\Helper\SecureHtmlRenderer;
 
-    /** @var CookiebotScriptViewModel $viewModel */
-    /** @var SecureHtmlRenderer $secureRenderer */
-    /** @var Template $block */
+/** @var CookiebotScriptViewModel $viewModel */
+/** @var SecureHtmlRenderer $secureRenderer */
+/** @var Template $block */
 
-    $viewModel = $block->getData('view_model')
+$viewModel = $block->getData('view_model')
 ?>
-<?= /* @noEscape */ $viewModel->getScript() ?>
+<?= /* @noEscape */
+$viewModel->getScript() ?>
 <?php
 
 if ($viewModel->isGoogleConsentModeEnabled()) {

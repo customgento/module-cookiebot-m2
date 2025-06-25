@@ -26,7 +26,7 @@ class TemplatePlugin
      */
     public function __construct(Config $config, ExternalVideoReplacer $externalVideoReplacer)
     {
-        $this->config = $config;
+        $this->config                = $config;
         $this->externalVideoReplacer = $externalVideoReplacer;
     }
 

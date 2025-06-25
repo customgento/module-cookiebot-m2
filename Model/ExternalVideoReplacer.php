@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace CustomGento\Cookiebot\Model;
 
-class YouTubeReplacer
+class ExternalVideoReplacer
 {
     /**
      * Replace iframe sources with cookie consent attributes for YouTube, Vimeo, and Google Maps
@@ -21,10 +21,7 @@ class YouTubeReplacer
             '/<iframe([^>]*)\s+src=["\'](https?:\/\/(?:www\.)?youtu\.be\/[^"\']+)["\']([^>]*)>/i',
             // Vimeo patterns
             '/<iframe([^>]*)\s+src=["\'](https?:\/\/(?:www\.)?vimeo\.com\/[^"\']+)["\']([^>]*)>/i',
-            '/<iframe([^>]*)\s+src=["\'](https?:\/\/(?:www\.)?player\.vimeo\.com\/[^"\']+)["\']([^>]*)>/i',
-            // Google Maps patterns
-            '/<iframe([^>]*)\s+src=["\'](https?:\/\/(?:www\.)?google\.com\/maps\/[^"\']+)["\']([^>]*)>/i',
-            '/<iframe([^>]*)\s+src=["\'](https?:\/\/(?:www\.)?maps\.google\.com\/[^"\']+)["\']([^>]*)>/i',
+            '/<iframe([^>]*)\s+src=["\'](https?:\/\/(?:www\.)?player\.vimeo\.com\/[^"\']+)["\']([^>]*)>/i'
         ];
 
         foreach ($iframePatterns as $pattern) {

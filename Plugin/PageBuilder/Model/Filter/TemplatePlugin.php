@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace CustomGento\Cookiebot\Plugin\PageBuilder\Model\Filter;
 
 use CustomGento\Cookiebot\Model\Config;
-use CustomGento\Cookiebot\Model\YouTubeReplacer;
+use CustomGento\Cookiebot\Model\ExternalVideoReplacer;
 use Magento\PageBuilder\Model\Filter\Template;
 
 class TemplatePlugin
@@ -16,18 +16,18 @@ class TemplatePlugin
     private $config;
 
     /**
-     * @var YouTubeReplacer
+     * @var ExternalVideoReplacer
      */
-    private $youTubeReplacer;
+    private $externalVideoReplacer;
 
     /**
-     * @param Config $config
-     * @param YouTubeReplacer $youTubeReplacer
+     * @param Config                $config
+     * @param ExternalVideoReplacer $externalVideoReplacer
      */
-    public function __construct(Config $config, YouTubeReplacer $youTubeReplacer)
+    public function __construct(Config $config, ExternalVideoReplacer $externalVideoReplacer)
     {
         $this->config = $config;
-        $this->youTubeReplacer = $youTubeReplacer;
+        $this->externalVideoReplacer = $externalVideoReplacer;
     }
 
     /**
@@ -40,6 +40,6 @@ class TemplatePlugin
             return $result;
         }
 
-        return $this->youTubeReplacer->replaceIframeSources($result);
+        return $this->externalVideoReplacer->replaceIframeSources($result);
     }
 } 

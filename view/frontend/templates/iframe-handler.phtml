@@ -101,20 +101,6 @@ if ($viewModel && $viewModel->isBlockVideosUntilConsentEnabled()) {
     });
     ';
 
-    $newScript = '
-        document.addEventListener("DOMContentLoaded", function() {
-            alert("test");
-        })
-    ';
-
-    // Render scripts with secure renderer
-//    echo $secureRenderer->renderTag(
-//        'script',
-//        ['type' => 'text/javascript', 'data-cookieconsent' => 'ignore'],
-//        $addRequiredAttributesScript,
-//        false
-//    );
-
     echo $secureRenderer->renderTag(
         'script',
         ['type' => 'text/javascript', 'data-cookieconsent' => 'ignore'],
@@ -123,10 +109,3 @@ if ($viewModel && $viewModel->isBlockVideosUntilConsentEnabled()) {
     );
 }
 ?>
-
-<!--<script>-->
-<!--    document.addEventListener("DOMContentLoaded", function() {-->
-<!--        const gallery = document.querySelector('.fotorama__wrap .fotorama__stage');-->
-<!--        gallery.classList.add('fotorama-video-container');-->
-<!--    }-->
-<!--</script>-->

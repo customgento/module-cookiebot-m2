@@ -1,26 +1,26 @@
 define([
-    'jquery'
+    'jquery',
 ], function ($) {
     'use strict';
 
     return function (widget) {
         $.widget('mage.AddFotoramaVideoEvents', widget, {
-
             _clickHandler: function (e) {
                 const blockVideoConsentConfig = window.cookiebotConfig && window.cookiebotConfig.blockVideosUntilConsent;
+
+                if (Cookiebot?.consent?.marketing) {
+                    this._super(e);
+                    return;
+                }
 
                 if (!Cookiebot?.consent?.marketing && blockVideoConsentConfig) {
                     const videoElement = event.target.querySelector('.product-video');
 
-                    if (Cookiebot?.consent?.marketing) {
-                        return;
-                    }
-
                     const linkElement = document.createElement("a");
                     const divElement = document.createElement("div");
                     const paragraphElement = document.createElement("p");
-                    const iframeHeight = videoElement.getBoundingClientRect().height || 300;
-                    const iframeWidth = videoElement.getBoundingClientRect().width || 400;
+                    const iframeHeight = videoElement?.getBoundingClientRect().height || 300;
+                    const iframeWidth = videoElement?.getBoundingClientRect().width || 400;
 
 
                     divElement.innerHTML = `
@@ -44,12 +44,33 @@ define([
                     divElement.append(paragraphElement);
                     paragraphElement.style.zIndex = "1000";
                     paragraphElement.style.position = "relative";
-                    videoElement.parentNode.insertBefore(divElement, videoElement);
+                    videoElement?.parentNode.insertBefore(divElement, videoElement);
 
                     return;
                 }
                 this._super(e);
             },
+
+            _initialize: function () {
+                this._super();
+                addEventListener("CookiebotOnAccept", () => {
+                    const videoIframes = document.querySelectorAll(".pagebuilder-video-container iframe");
+
+                    videoIframes.forEach((iframe) => {
+                        if (Cookiebot?.consent?.marketing) {
+                            const cookiebotOutput = document?.querySelector('.cookieconsent-optout-marketing');
+                            const videoElement = cookiebotOutput.closest('.video-unplayed[aria-hidden="false"]');
+
+                            const event = new PointerEvent('click', {
+                                bubbles: true,
+                                cancelable: true,
+                                view: window
+                            });
+                            videoElement?.dispatchEvent(event);
+                        }
+                    });
+                });
+            }
         });
 
         return $.mage.AddFotoramaVideoEvents;

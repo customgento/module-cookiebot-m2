@@ -18,7 +18,7 @@ class ExternalVideoReplacer
         ];
 
         foreach ($iframePatterns as $pattern) {
-            $content = preg_replace_callback($pattern, function ($matches) {
+            $content = preg_replace_callback($pattern, function (array $matches) {
                 $beforeSrc = $matches[1];
                 $iframeUrl = $matches[2];
                 $afterSrc  = $matches[3];

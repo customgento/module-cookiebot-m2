@@ -8,7 +8,7 @@ use CustomGento\Cookiebot\Model\Config;
 use CustomGento\Cookiebot\Model\ExternalVideoReplacer;
 use Magento\PageBuilder\Model\Filter\Template;
 
-class TemplatePlugin
+class AddVideoBlockerFilterPlugin
 {
     public function __construct(
         private readonly Config $config,

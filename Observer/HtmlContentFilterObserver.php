@@ -26,6 +26,10 @@ class HtmlContentFilterObserver implements ObserverInterface
         try {
             /** @var Http $response */
             $response = $observer->getData('response');
+
+            if (!$this->config->isBlockVideosUntilConsentEnabled()) {
+                return;
+            }
             
             if (!$response instanceof Http) {
                 return;
@@ -37,19 +41,9 @@ class HtmlContentFilterObserver implements ObserverInterface
                 return;
             }
 
-            // Only process if the block_videos_until_consent feature is enabled
-            if (!$this->config->isBlockVideosUntilConsentEnabled()) {
-                return;
-            }
-
             $modifiedContent = $this->externalVideoReplacer->replaceIframeSources($content);
 
-            // Filter and modify the content
-//            $modifiedContent = $this->filterHtmlContent($content);
-            
-            // Update the response body
             $response->setBody($modifiedContent);
-            
         } catch (\Exception $e) {
             $this->logger->error('Error in HtmlContentFilterObserver: ' . $e->getMessage());
         }

@@ -1,6 +1,9 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
     <type name="Magento\PageBuilder\Model\Filter\Template">
-        <plugin name="customgento_cookiebot_pagebuilder_template_video_blocker_plugin" type="CustomGento\Cookiebot\Plugin\PageBuilder\Model\Filter\AddVideoBlockerFilterPlugin" sortOrder="10"/>
+        <plugin name="customgento_cookiebot_pagebuilder_template_video_blocker_plugin" type="CustomGento\Cookiebot\Plugin\PageBuilder\Model\Filter\AddVideoBlockerToCmsContentPlugin" sortOrder="10"/>
+    </type>
+    <type name="Magento\Cms\Model\Page">
+        <plugin name="customgento_cookiebot_cms_page_content_video_blocker_plugin" type="CustomGento\Cookiebot\Plugin\Cms\Model\AddVideoBlockerToCmsContentPlugin" sortOrder="10"/>
     </type>
 </config>

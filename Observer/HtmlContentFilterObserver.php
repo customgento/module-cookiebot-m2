@@ -6,10 +6,9 @@ namespace CustomGento\Cookiebot\Observer;
 
 use CustomGento\Cookiebot\Model\Config;
 use CustomGento\Cookiebot\Model\ExternalVideoReplacer;
+use Magento\Framework\App\Response\Http;
 use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
-use Magento\Framework\App\Response\Http;
-use Magento\Framework\App\RequestInterface;
 use Psr\Log\LoggerInterface;
 
 class HtmlContentFilterObserver implements ObserverInterface
@@ -30,13 +29,13 @@ class HtmlContentFilterObserver implements ObserverInterface
             if (!$this->config->isBlockVideosUntilConsentEnabled()) {
                 return;
             }
-            
+
             if (!$response instanceof Http) {
                 return;
             }
 
             $content = $response->getBody();
-            
+
             if (empty($content) || !is_string($content)) {
                 return;
             }

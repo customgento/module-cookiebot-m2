@@ -20,6 +20,7 @@ define([
                 const iframeHeight = videoElement?.getBoundingClientRect().height || 300;
                 const iframeWidth = videoElement?.getBoundingClientRect().width || 400;
 
+
                 divElement.innerHTML = `
                                         <div style="background-color:#CCC;display:inline-block;height:${iframeHeight}px;position:relative;width:${iframeWidth}px; z-index: 1000;">
                                             <div style="background-color:#848484;border-radius:15px;height:50%;position:absolute;transform:translate(50%,50%);width:50%;">
@@ -47,21 +48,17 @@ define([
             _initialize: function () {
                 this._super();
                 addEventListener("CookiebotOnAccept", () => {
-                    const videoIframes = document.querySelectorAll(".pagebuilder-video-container iframe");
+                    if (Cookiebot?.consent?.marketing) {
+                        const cookiebotOutput = document?.querySelector('.cookieconsent-optout-marketing');
+                        const videoElement = cookiebotOutput.closest('.video-unplayed[aria-hidden="false"]');
 
-                    videoIframes.forEach((iframe) => {
-                        if (Cookiebot?.consent?.marketing) {
-                            const cookiebotOutput = document?.querySelector('.cookieconsent-optout-marketing');
-                            const videoElement = cookiebotOutput.closest('.video-unplayed[aria-hidden="false"]');
-
-                            const event = new PointerEvent('click', {
-                                bubbles: true,
-                                cancelable: true,
-                                view: window
-                            });
-                            videoElement?.dispatchEvent(event);
-                        }
-                    });
+                        const event = new PointerEvent('click', {
+                            bubbles: true,
+                            cancelable: true,
+                            view: window
+                        });
+                        videoElement?.dispatchEvent(event);
+                    }
                 });
             }
         });

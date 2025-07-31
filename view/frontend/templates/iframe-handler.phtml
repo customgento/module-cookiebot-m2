@@ -7,10 +7,9 @@ use Magento\Framework\View\Helper\SecureHtmlRenderer;
 
 /** @var SecureHtmlRenderer $secureRenderer */
 /** @var Script $viewModel */
-
 $viewModel = $block->getData('view_model');
 $consentMessage
-           = "Please <a href='javascript:Cookiebot.renew()' class='cookiebot-iframe-consent-link'>accept %1 cookies</a>  to view this %2 content.";
+           = 'Please <a href="javascript:Cookiebot.renew()" class="cookiebot-iframe-consent-link">accept %1 cookies</a> to view this %2 content.';
 
 $scriptString = '
     document.addEventListener("DOMContentLoaded", function () {
@@ -68,4 +67,3 @@ if (class_exists(SecureHtmlRenderer::class)) {
 } else {
     echo '<script data-cookieconsent="ignore">' . $scriptString . '</script>';
 }
-

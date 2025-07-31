@@ -49,7 +49,7 @@ $scriptString = '
 
                 // Setup consent message and button
                 divElement.classList.add(`cookieconsent-optout-${consentType}`);
-                const consentMessage = "' . $consentMessage . '";
+                const consentMessage = `' . $consentMessage . '`;
                 const message = consentMessage
                     .replace("%1", consentType)
                     .replace("%2", serviceProvider);

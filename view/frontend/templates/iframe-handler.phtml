@@ -3,8 +3,10 @@
 declare(strict_types=1);
 
 use CustomGento\Cookiebot\ViewModel\Script;
+use Magento\Framework\View\Element\Template;
 use Magento\Framework\View\Helper\SecureHtmlRenderer;
 
+/** @var Template $block */
 /** @var SecureHtmlRenderer $secureRenderer */
 /** @var Script $viewModel */
 $viewModel = $block->getData('view_model');

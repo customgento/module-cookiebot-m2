@@ -6,6 +6,7 @@ namespace CustomGento\Cookiebot\Observer;
 
 use CustomGento\Cookiebot\Model\Config;
 use CustomGento\Cookiebot\Model\ExternalVideoReplacer;
+use Exception;
 use Magento\Framework\App\Response\Http;
 use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
@@ -22,13 +23,12 @@ class HtmlContentFilterObserver implements ObserverInterface
 
     public function execute(Observer $observer): void
     {
-        try {
-            /** @var Http $response */
-            $response = $observer->getData('response');
+        if (!$this->config->isBlockVideosUntilConsentEnabled()) {
+            return;
+        }
 
-            if (!$this->config->isBlockVideosUntilConsentEnabled()) {
-                return;
-            }
+        try {
+            $response = $observer->getData('response');
 
             if (!$response instanceof Http) {
                 return;
@@ -43,8 +43,8 @@ class HtmlContentFilterObserver implements ObserverInterface
             $modifiedContent = $this->externalVideoReplacer->replaceIframeSources($content);
 
             $response->setBody($modifiedContent);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $this->logger->error('Error in HtmlContentFilterObserver: ' . $e->getMessage());
         }
     }
-} 
+}

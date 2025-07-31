@@ -36,4 +36,4 @@ class ExternalVideoReplacer
 
         return $content;
     }
-} 
+}

@@ -121,4 +121,4 @@ class ExternalVideoReplacerTest extends TestCase
             ]
         ];
     }
-} 
+}

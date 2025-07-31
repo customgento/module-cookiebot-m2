@@ -14,12 +14,11 @@ define([
                 }
 
                 const videoElement = event.target.querySelector('.product-video');
-                const linkElement = document.createElement("a");
-                const divElement = document.createElement("div");
-                const paragraphElement = document.createElement("p");
+                const linkElement = document.createElement('a');
+                const divElement = document.createElement('div');
+                const paragraphElement = document.createElement('p');
                 const iframeHeight = videoElement?.getBoundingClientRect().height || 300;
                 const iframeWidth = videoElement?.getBoundingClientRect().width || 400;
-
 
                 divElement.innerHTML = `
                                         <div style="background-color:#CCC;display:inline-block;height:${iframeHeight}px;position:relative;width:${iframeWidth}px; z-index: 1000;">
@@ -31,23 +30,23 @@ define([
 
                 divElement.classList.add('cookieconsent-optout-marketing');
                 linkElement.textContent = 'accept marketing cookies';
-                linkElement.href = "javascript:Cookiebot.renew()";
+                linkElement.href = 'javascript:Cookiebot.renew()';
                 paragraphElement.append(
-                    document.createTextNode("Please "),
+                    document.createTextNode('Please '),
                     linkElement,
                     document.createTextNode(' to view this content.')
                 );
 
-                divElement.style.fontSize = "1.4rem";
+                divElement.style.fontSize = '1.4rem';
                 divElement.append(paragraphElement);
-                paragraphElement.style.zIndex = "1000";
-                paragraphElement.style.position = "relative";
+                paragraphElement.style.zIndex = '1000';
+                paragraphElement.style.position = 'relative';
                 videoElement?.parentNode.insertBefore(divElement, videoElement);
             },
 
             _initialize: function () {
                 this._super();
-                addEventListener("CookiebotOnAccept", () => {
+                addEventListener('CookiebotOnAccept', () => {
                     if (Cookiebot?.consent?.marketing) {
                         const cookiebotOutput = document?.querySelector('.cookieconsent-optout-marketing');
                         const videoElement = cookiebotOutput.closest('.video-unplayed[aria-hidden="false"]');
@@ -65,4 +64,4 @@ define([
 
         return $.mage.AddFotoramaVideoEvents;
     };
-}); 
+});

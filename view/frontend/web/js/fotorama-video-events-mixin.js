@@ -29,17 +29,13 @@ define([
                                     `;
 
                 divElement.classList.add('cookieconsent-optout-marketing');
-                linkElement.textContent = 'accept marketing cookies';
-                linkElement.href = 'javascript:Cookiebot.renew()';
-                paragraphElement.append(
-                    document.createTextNode('Please '),
-                    linkElement,
-                    document.createTextNode(' to view this content.')
-                );
+                paragraphElement.innerHTML =
+                    $.mage.__('Please <a href="javascript:Cookiebot.renew()">accept marketing cookies</a> to view this content.')
+                ;
 
                 divElement.style.fontSize = '1.4rem';
                 divElement.append(paragraphElement);
-                paragraphElement.style.zIndex = '1000';
+                paragraphElement.style.zIndex = '10001';
                 paragraphElement.style.position = 'relative';
                 videoElement?.parentNode.insertBefore(divElement, videoElement);
             },

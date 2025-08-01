@@ -14,7 +14,6 @@ define([
                 }
 
                 const videoElement = event.target.querySelector('.product-video');
-                const linkElement = document.createElement('a');
                 const divElement = document.createElement('div');
                 const paragraphElement = document.createElement('p');
                 const iframeHeight = videoElement?.getBoundingClientRect().height || 300;

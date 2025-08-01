@@ -10,8 +10,7 @@ use Magento\Framework\View\Helper\SecureHtmlRenderer;
 
 $viewModel = $block->getData('view_model')
 ?>
-<?= /* @noEscape */
-$viewModel->getScript() ?>
+<?= /* @noEscape */ $viewModel->getScript() ?>
 <?php
 
 if ($viewModel->isGoogleConsentModeEnabled()) {

@@ -15,7 +15,9 @@ use Psr\Log\LoggerInterface;
 class HtmlContentFilterObserver implements ObserverInterface
 {
     private LoggerInterface $logger;
+
     private Config $config;
+
     private ExternalVideoReplacer $externalVideoReplacer;
 
     public function __construct(
@@ -24,8 +26,8 @@ class HtmlContentFilterObserver implements ObserverInterface
         ExternalVideoReplacer $externalVideoReplacer
     ) {
         $this->externalVideoReplacer = $externalVideoReplacer;
-        $this->config = $config;
-        $this->logger = $logger;
+        $this->config                = $config;
+        $this->logger                = $logger;
     }
 
     public function execute(Observer $observer): void

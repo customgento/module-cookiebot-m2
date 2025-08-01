@@ -3,6 +3,7 @@
         xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
     <module name="CustomGento_Cookiebot">
         <sequence>
+            <module name="Magento_Backend"/>
             <module name="Magento_Catalog"/>
             <module name="Magento_Cms"/>
             <module name="Magento_Config"/>

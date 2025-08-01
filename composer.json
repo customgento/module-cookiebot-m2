@@ -10,13 +10,14 @@
         }
     ],
     "require": {
+        "ext-pcre": "*",
         "magento/framework": "~102.0||~103.0",
         "magento/module-catalog": "~103.0||~104.0",
         "magento/module-cms": "~103.0||~104.0",
-        "magento/module-config": "*",
-        "magento/module-page-builder": "*",
-        "magento/module-store": "*",
-        "php": "~7.4.0||~8.1.0||~8.2.0||~8.3.0||~8.4.0"
+        "magento/module-config": "^101.2",
+        "magento/module-store": "^101.1",
+        "php": "~7.4.0||~8.1.0||~8.2.0||~8.3.0||~8.4.0",
+        "psr/log": "^1.1||^2||^3"
     },
     "require-dev": {
         "phpunit/phpunit": "~6.5||~9.5",

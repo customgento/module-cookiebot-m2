@@ -3,4 +3,4 @@
 "Cookiebot ID","Cookiebot ID"
 "Data Culture","Data Culture"
 "Please <a href=""javascript:Cookiebot.renew()"" class=""cookiebot-iframe-consent-link"">accept %1 cookies</a> to view this %2 content.","Bitte <a href=""javascript:Cookiebot.renew()"" class=""cookiebot-iframe-consent-link"">akzeptieren Sie %1 Cookies</a>, um diesen %2 Inhalt anzuzeigen."
-"Please <a href="javascript:Cookiebot.renew()">accept marketing cookies</a> to view this content.","Bitte <a href="javascript:Cookiebot.renew()">akzeptieren Sie Marketing-Cookies</a>, um diesen Inhalt anzuzeigen."
+"Please <a href=""javascript:Cookiebot.renew()"">accept marketing cookies</a> to view this content.","Bitte <a href=""javascript:Cookiebot.renew()"">akzeptieren Sie Marketing-Cookies</a>, um diesen Inhalt anzuzeigen."

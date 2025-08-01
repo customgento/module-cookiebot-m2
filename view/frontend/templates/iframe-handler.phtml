@@ -3,15 +3,16 @@
 declare(strict_types=1);
 
 use CustomGento\Cookiebot\ViewModel\Script;
+use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
 use Magento\Framework\View\Helper\SecureHtmlRenderer;
 
 /** @var Template $block */
+/** @var Escaper $escaper */
 /** @var SecureHtmlRenderer $secureRenderer */
 /** @var Script $viewModel */
 $viewModel = $block->getData('view_model');
-$consentMessage
-           = 'Please <a href="javascript:Cookiebot.renew()" class="cookiebot-iframe-consent-link">accept %1 cookies</a> to view this %2 content.';
+$consentMessage = __('Please <a href="javascript:Cookiebot.renew()" class="cookiebot-iframe-consent-link">accept %1 cookies</a> to view this %2 content.');
 
 $scriptString = '
     document.addEventListener("DOMContentLoaded", function () {
@@ -49,7 +50,7 @@ $scriptString = '
 
                 // Setup consent message and button
                 divElement.classList.add(`cookieconsent-optout-${consentType}`);
-                const consentMessage = `' . $consentMessage . '`;
+                const consentMessage = `' . $escaper->escapeJs($consentMessage) . '`;
                 const message = consentMessage
                     .replace("%1", consentType)
                     .replace("%2", serviceProvider);

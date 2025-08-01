@@ -1,0 +1,72 @@
+<?php
+
+declare(strict_types=1);
+
+use CustomGento\Cookiebot\ViewModel\Script;
+use Magento\Framework\Escaper;
+use Magento\Framework\View\Element\Template;
+use Magento\Framework\View\Helper\SecureHtmlRenderer;
+
+/** @var Template $block */
+/** @var Escaper $escaper */
+/** @var SecureHtmlRenderer $secureRenderer */
+/** @var Script $viewModel */
+$viewModel = $block->getData('view_model');
+$consentMessage = __('Please <a href="javascript:Cookiebot.renew()" class="cookiebot-iframe-consent-link">accept %1 cookies</a> to view this %2 content.');
+
+$scriptString = '
+    document.addEventListener("DOMContentLoaded", function () {
+        ((document, selector, consentType) => {
+            const createTextNode = text => document.createTextNode(text);
+            const createElement = element => document.createElement(element);
+
+            document.querySelectorAll(selector).forEach(iframe => {
+                const divElement = createElement("div");
+                const paragraphElement = createElement("p");
+                const iframeSrc = iframe.dataset.cookieblockSrc;
+
+                // Detect service provider type
+                const serviceProvider =
+                    /google\.com\/maps\/embed/.test(iframeSrc) ? "Google Maps" :
+                        /player\.vimeo\.com\/video\//.test(iframeSrc) ? "Vimeo" :
+                            /youtube(-nocookie)?\.com\/embed\//.test(iframeSrc) ? "YouTube" :
+                                undefined;
+
+                if (!serviceProvider) {
+                    return;
+                }
+
+                const iframeHeight = iframe.getBoundingClientRect().height;
+                const iframeWidth = iframe.getBoundingClientRect().width;
+
+                // Create placeholder content
+                divElement.innerHTML = `
+                    <div style="background-color:#CCC;display:inline-block;height:${iframeHeight}px;position:relative;width:${iframeWidth}px;">
+                        <div style="background-color:#848484;border-radius:15px;height:50%;position:absolute;transform:translate(50%,50%);width:50%;">
+                            <p style="color:#FFF;font-size:7.5em;position:relative;top:50%;left:50%;margin:0;text-align:center;transform:translate(-50%,-50%);">&ctdot;</p>
+                        </div>
+                    </div>
+                `;
+
+                // Setup consent message and button
+                divElement.classList.add(`cookieconsent-optout-${consentType}`);
+                const consentMessage = `' . $escaper->escapeJs($consentMessage) . '`;
+                const message = consentMessage
+                    .replace("%1", consentType)
+                    .replace("%2", serviceProvider);
+                paragraphElement.innerHTML = message;
+
+                divElement.style.fontSize = "1.4rem";
+                divElement.append(paragraphElement);
+                iframe.parentNode.insertBefore(divElement, iframe);
+            });
+        })(document, "iframe[data-cookieblock-src]", "marketing");
+    })
+    ';
+
+// checking on if SecureHtmlRenderer exists first, because this module is still compatible with Magento 2.3.x which doesn't include this class
+if (class_exists(SecureHtmlRenderer::class)) {
+    echo $secureRenderer->renderTag('script', ['data-cookieconsent' => 'ignore'], $scriptString, false);
+} else {
+    echo '<script data-cookieconsent="ignore">' . $scriptString . '</script>';
+}

@@ -9,6 +9,7 @@
                 <data_culture/>
                 <use_eu_cdn>0</use_eu_cdn>
                 <use_google_consent_mode>1</use_google_consent_mode>
+                <block_videos_until_consent>0</block_videos_until_consent>
             </cookiebot>
         </web>
     </default>

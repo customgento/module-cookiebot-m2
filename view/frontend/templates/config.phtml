@@ -1,0 +1,24 @@
+<?php
+
+declare(strict_types=1);
+
+/**
+ * Template to pass configuration to JavaScript
+ */
+
+use CustomGento\Cookiebot\ViewModel\Script;
+use Magento\Framework\View\Element\Template;
+use Magento\Framework\View\Helper\SecureHtmlRenderer;
+
+/** @var Template $block */
+/** @var SecureHtmlRenderer $secureRenderer */
+/** @var Script $viewModel */
+$viewModel = $block->getData('view_model');
+
+$configJson = json_encode([
+    'blockVideosUntilConsent' => (bool)$viewModel->isBlockVideosUntilConsentEnabled()
+]);
+
+$script = 'window.cookiebotConfig = ' . $configJson . ';';
+
+echo $secureRenderer->renderTag('script', ['type' => 'text/javascript'], $script, false);

@@ -7,6 +7,18 @@
                     <argument name="view_model" xsi:type="object">CustomGento\Cookiebot\ViewModel\Script</argument>
                 </arguments>
             </block>
+            <block name="customgento.cookiebot.config" template="CustomGento_Cookiebot::config.phtml">
+                <arguments>
+                    <argument name="view_model" xsi:type="object">CustomGento\Cookiebot\ViewModel\Script</argument>
+                </arguments>
+            </block>
         </referenceBlock>
+        <referenceContainer name="before.body.end">
+            <block name="customgento.cookiebot.iframe.handler" template="CustomGento_Cookiebot::iframe-handler.phtml">
+                <arguments>
+                    <argument name="view_model" xsi:type="object">CustomGento\Cookiebot\ViewModel\Script</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
     </body>
 </page>

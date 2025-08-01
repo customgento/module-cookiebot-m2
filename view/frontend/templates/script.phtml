@@ -1,13 +1,14 @@
 <?php
-    use CustomGento\Cookiebot\ViewModel\Script as CookiebotScriptViewModel;
-    use Magento\Framework\View\Element\Template;
-    use Magento\Framework\View\Helper\SecureHtmlRenderer;
 
-    /** @var CookiebotScriptViewModel $viewModel */
-    /** @var SecureHtmlRenderer $secureRenderer */
-    /** @var Template $block */
+use CustomGento\Cookiebot\ViewModel\Script as CookiebotScriptViewModel;
+use Magento\Framework\View\Element\Template;
+use Magento\Framework\View\Helper\SecureHtmlRenderer;
 
-    $viewModel = $block->getData('view_model')
+/** @var CookiebotScriptViewModel $viewModel */
+/** @var SecureHtmlRenderer $secureRenderer */
+/** @var Template $block */
+
+$viewModel = $block->getData('view_model')
 ?>
 <?= /* @noEscape */ $viewModel->getScript() ?>
 <?php

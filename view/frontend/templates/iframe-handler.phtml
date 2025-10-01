@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 use CustomGento\Cookiebot\ViewModel\Script;
@@ -12,8 +11,8 @@ use Magento\Framework\View\Helper\SecureHtmlRenderer;
 /** @var SecureHtmlRenderer $secureRenderer */
 /** @var Script $viewModel */
 $viewModel = $block->getData('view_model');
-$consentMessage = __('Please <a href="javascript:Cookiebot.renew()" class="cookiebot-iframe-consent-link">accept %1 cookies</a> to view this %2 content.');
-
+$consentMessage
+           = __('Please <a href="javascript:Cookiebot.renew()" class="cookiebot-iframe-consent-link">accept %1 cookies</a> to view this %2 content.');
 $scriptString = '
     document.addEventListener("DOMContentLoaded", function () {
         ((document, selector, consentType) => {
@@ -61,9 +60,29 @@ $scriptString = '
                 iframe.parentNode.insertBefore(divElement, iframe);
             });
         })(document, "iframe[data-cookieblock-src]", "marketing");
-    })
-    ';
-
+        
+        function fixIframeStyle () {
+            ((document, selector) => {
+                document.querySelectorAll(selector).forEach(iframe => {
+                    const pageBuilderContainer = iframe.closest(".pagebuilder-video-container");
+                    const pageBuilderColumn = iframe.closest(".pagebuilder-column");
+                    if (!pageBuilderContainer) {
+                        return;
+                    }
+                    if (!Cookiebot?.consent?.marketing) {
+                        pageBuilderContainer.style.paddingTop = "0";
+                        pageBuilderColumn.style.backgroundColor = "#fff";
+                    } else {
+                        pageBuilderContainer.style.paddingTop = "56.25%";
+                    }
+                });
+            })(document, "iframe");
+        }
+        
+        addEventListener("CookiebotOnConsentReady", function() {
+            fixIframeStyle()
+        });
+    })';
 // checking on if SecureHtmlRenderer exists first, because this module is still compatible with Magento 2.3.x which doesn't include this class
 if (class_exists(SecureHtmlRenderer::class)) {
     echo $secureRenderer->renderTag('script', ['data-cookieconsent' => 'ignore'], $scriptString, false);

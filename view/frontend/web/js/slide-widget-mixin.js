@@ -16,7 +16,7 @@ define([
             }
 
             let viewportElement = document.createElement('div');
-            let $slider = videoElement.getAttribute('data-video-src')
+            let $slider = $(element).closest('[data-content-type=slider]');
             const blockVideoConsentConfig = window.cookiebotConfig && window.cookiebotConfig.blockVideosUntilConsent;
 
             addEventListener('CookiebotOnLoad', () => {
@@ -38,7 +38,6 @@ define([
                     return;
                 }
 
-                $slider = $(element).closest('[data-content-type=slider]');
                 viewportElement.classList.add('jarallax-viewport-element');
 
                 if (!videoElement) {

@@ -18,12 +18,10 @@ $scriptString = '
         ((document, selector, consentType) => {
             const createTextNode = text => document.createTextNode(text);
             const createElement = element => document.createElement(element);
-
             document.querySelectorAll(selector).forEach(iframe => {
                 const divElement = createElement("div");
                 const paragraphElement = createElement("p");
                 const iframeSrc = iframe.dataset.cookieblockSrc;
-
                 // Detect service provider type
                 const serviceProvider =
                     /google\.com\/maps\/embed/.test(iframeSrc) ? "Google Maps" :
@@ -71,12 +69,14 @@ $scriptString = '
                     }
                     if (!Cookiebot?.consent?.marketing) {
                         pageBuilderContainer.style.paddingTop = "0";
-                        pageBuilderColumn.style.backgroundColor = "#fff";
+                        if (pageBuilderColumn) {
+                            pageBuilderColumn.style.backgroundColor = "#fff";
+                        }
                     } else {
                         pageBuilderContainer.style.paddingTop = "56.25%";
                     }
                 });
-            })(document, "iframe");
+            })(document, "iframe", "marketing");
         }
         
         addEventListener("CookiebotOnConsentReady", function() {

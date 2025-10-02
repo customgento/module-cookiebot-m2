@@ -49,7 +49,15 @@ define([
                     videoElement.setAttribute('data-video-src', videoElement.getAttribute('data-cookieblock-src'));
                     videoElement.style.display = 'block';
                     videoElement.removeAttribute('data-cookieblock-src');
-                    videoElement.closest('.custom-slide-uwt').querySelector('.cookieconsent-optout-marketing').remove();
+                    
+                    // Safely remove the consent blocker element with null checks
+                    const customSlide = videoElement.closest('.custom-slide-uwt');
+                    if (customSlide) {
+                        const consentBlocker = customSlide.querySelector('.cookieconsent-optout-marketing');
+                        if (consentBlocker) {
+                            consentBlocker.remove();
+                        }
+                    }
                 }
                 videoElement.setAttribute('data-element-in-viewport', '.jarallax-viewport-element');
                 videoElement.appendChild(viewportElement);

@@ -12,6 +12,7 @@ define([
             let videoElement = element[0].querySelector('[data-background-type=video]');
             let previousStatus = '';
             if (!videoElement) {
+                originalWidget(config, element);
                 return;
             }
 

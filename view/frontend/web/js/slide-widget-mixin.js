@@ -10,7 +10,7 @@ define([
     return function (originalWidget) {
         return function (config, element) {
             let videoElement = element[0].querySelector('[data-background-type=video]');
-            let PreviousStatus = '';
+            let previousStatus = '';
             if (!videoElement) {
                 return;
             }
@@ -25,7 +25,7 @@ define([
             )
 
             function sliderVideoBlocker(){
-                if (PreviousStatus === 'blocked' && !Cookiebot?.consent?.marketing) {
+                if (previousStatus === 'blocked' && !Cookiebot?.consent?.marketing) {
                     return;
                 }
 
@@ -34,7 +34,7 @@ define([
                     videoElement.removeAttribute('data-video-src');
                     createVideoBlocker(videoElement);
                     videoElement.style.display = 'none';
-                    PreviousStatus = 'blocked';
+                    previousStatus = 'blocked';
                     return;
                 }
 
@@ -48,9 +48,8 @@ define([
                     videoElement.setAttribute('data-video-src', videoElement.getAttribute('data-cookieblock-src'));
                     videoElement.style.display = 'block';
                     videoElement.removeAttribute('data-cookieblock-src');
-                    
-                    // Safely remove the consent blocker element with null checks
-                    const customSlide = videoElement.closest('.custom-slide-uwt');
+
+                    const customSlide = videoElement.closest('.slick-slide');
                     if (customSlide) {
                         const consentBlocker = customSlide.querySelector('.cookieconsent-optout-marketing');
                         if (consentBlocker) {
@@ -62,22 +61,9 @@ define([
                 videoElement.appendChild(viewportElement);
                 videoBackground(config, videoElement);
                 videoElement.style.display = 'block';
-                PreviousStatus = 'unblocked';
+                previousStatus = 'unblocked';
 
-                if ($slider.data('afterChangeIsSet')) {
-                    return;
-                }
-
-                $slider.on('afterChange init', function () {
-                    var videoSlides = $slider[0].querySelectorAll('.jarallax');
-
-                    _.each(videoSlides, function (videoSlide) {
-                        videoSlide.jarallax && videoSlide.jarallax.onScroll();
-                    });
-                });
-
-                $slider.data('afterChangeIsSet', true);
-
+                this.super(config, element);
             }
 
             sliderVideoBlocker();

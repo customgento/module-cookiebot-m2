@@ -14,10 +14,7 @@ define([
                     return;
                 }
 
-                const videoElement = event.target.querySelector('.product-video');
-                
-                // Use the video blocker widget
-                createVideoBlocker(videoElement);
+                createVideoBlocker(e.target.querySelector('.product-video'));
             },
 
             _initialize: function () {

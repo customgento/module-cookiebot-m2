@@ -79,9 +79,7 @@ $scriptString = '
             })(document, "iframe", "marketing");
         }
         
-        addEventListener("CookiebotOnConsentReady", function() {
-            fixIframeStyle()
-        });
+        addEventListener("CookiebotOnConsentReady", fixIframeStyle);
     })';
 // checking on if SecureHtmlRenderer exists first, because this module is still compatible with Magento 2.3.x which doesn't include this class
 if (class_exists(SecureHtmlRenderer::class)) {

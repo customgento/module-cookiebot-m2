@@ -7,6 +7,10 @@ define([
     return function (videoElement) {
         'use strict';
 
+        if (!videoElement) {
+            return null;
+        }
+
         const divElement = document.createElement('div');
         const paragraphElement = document.createElement('p');
         const iframeHeight = videoElement?.getBoundingClientRect().height || 300;

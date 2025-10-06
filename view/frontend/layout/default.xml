@@ -14,7 +14,7 @@
             </block>
         </referenceBlock>
         <referenceContainer name="before.body.end">
-            <block name="customgento.cookiebot.iframe.handler" template="CustomGento_Cookiebot::iframe-handler.phtml">
+            <block name="customgento.cookiebot.iframe.handler" template="CustomGento_Cookiebot::iframe-handler.phtml" ifconfig="web/cookiebot/block_videos_until_consent">
                 <arguments>
                     <argument name="view_model" xsi:type="object">CustomGento\Cookiebot\ViewModel\Script</argument>
                 </arguments>

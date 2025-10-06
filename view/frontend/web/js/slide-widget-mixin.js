@@ -9,15 +9,16 @@ define([
 
     return function (originalWidget) {
         return function (config, element) {
-            let videoElement = element[0].querySelector('[data-background-type=video]');
+            const videoElement = element[0].querySelector('[data-background-type=video]');
+            const blockVideoConsentConfig = window.cookiebotConfig && window.cookiebotConfig.blockVideosUntilConsent;
             let previousStatus = '';
-            if (!videoElement) {
+            if (!videoElement || !blockVideoConsentConfig) {
                 originalWidget(config, element);
                 return;
             }
 
-            let viewportElement = document.createElement('div');
-            const blockVideoConsentConfig = window.cookiebotConfig && window.cookiebotConfig.blockVideosUntilConsent;
+            const viewportElement = document.createElement('div');
+
 
             addEventListener('CookiebotOnLoad', sliderVideoBlocker);
 
@@ -26,7 +27,7 @@ define([
                     return;
                 }
 
-                if (!Cookiebot?.consent?.marketing && blockVideoConsentConfig) {
+                if (!Cookiebot?.consent?.marketing) {
                     videoElement.setAttribute('data-cookieblock-src', videoElement.getAttribute('data-video-src'));
                     videoElement.removeAttribute('data-video-src');
                     createVideoBlocker(videoElement);
@@ -50,7 +51,6 @@ define([
                     if (customSlide) {
                         const consentBlocker = customSlide.querySelector('.cookieconsent-optout-marketing');
                         consentBlocker?.remove();
-
                     }
                 }
                 videoElement.setAttribute('data-element-in-viewport', '.jarallax-viewport-element');

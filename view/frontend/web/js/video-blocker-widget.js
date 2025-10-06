@@ -1,7 +1,6 @@
 define([
-    'jquery',
     'mage/translate'
-], function ($, $t) {
+], function ($t) {
     'use strict';
 
     return function (videoElement) {

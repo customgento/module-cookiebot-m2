@@ -8,13 +8,10 @@ define([
     'use strict';
 
     return function (originalWidget) {
-        /**
-         * Check if the video source URL is from a supported platform
-         * @param {string} url - The video source URL
-         * @returns {boolean} - True if the URL is from YouTube, YouTube-nocookie, or Vimeo
-         */
         function isSupportedVideoPlatform(url) {
-            if (!url) return false;
+            if (!url) {
+                return false;
+            }
             
             // Regex patterns for supported video platforms
             const youtubePattern = /^https?:\/\/(www\.)?(youtube\.com|youtu\.be)\//i;
@@ -28,7 +25,6 @@ define([
 
         return function (config, element) {
             const videoElement = element[0].querySelector('[data-background-type=video]');
-            console.log('videoElement', videoElement);
             const blockVideoConsentConfig = window.cookiebotConfig && window.cookiebotConfig.blockVideosUntilConsent;
             const videoSrc = videoElement.getAttribute('data-video-src');
             const cookieblockSrc = videoElement.getAttribute('data-cookieblock-src');
@@ -46,7 +42,7 @@ define([
             addEventListener('CookiebotOnLoad', sliderVideoBlocker);
 
             function sliderVideoBlocker() {
-                if (previousStatus === 'blocked' && !Cookiebot?.consent?.marketing) {
+                if (previousStatus === 'blocked' && (!Cookiebot?.consent?.marketing)) {
                     return;
                 }
 

@@ -49,9 +49,10 @@ $scriptString = '
                 divElement.classList.add(`cookieconsent-optout-${consentType}`);
                 const consentMessage = `' . $escaper->escapeJs($consentMessage) . '`;
                 const message = consentMessage
-                    .replace("%1", consentType)
+                    .replace("%1", consentType.charAt(0).toUpperCase() + consentType.slice(1))
                     .replace("%2", serviceProvider);
                 paragraphElement.innerHTML = message;
+                paragraphElement.style.textAlign = "center";
 
                 divElement.style.fontSize = "1.4rem";
                 divElement.append(paragraphElement);

@@ -25,13 +25,19 @@ define([
 
         return function (config, element) {
             const videoElement = element[0].querySelector('[data-background-type=video]');
+
+            if (!videoElement) {
+                originalWidget(config, element);
+                return;
+            }
+
             const blockVideoConsentConfig = window.cookiebotConfig && window.cookiebotConfig.blockVideosUntilConsent;
             const videoSrc = videoElement.getAttribute('data-video-src');
             const cookieblockSrc = videoElement.getAttribute('data-cookieblock-src');
             const src = videoSrc || cookieblockSrc;
             let previousStatus = '';
             
-            if (!videoElement || !blockVideoConsentConfig || !isSupportedVideoPlatform(src)) {
+            if (!blockVideoConsentConfig || !isSupportedVideoPlatform(src)) {
                 originalWidget(config, element);
                 return;
             }

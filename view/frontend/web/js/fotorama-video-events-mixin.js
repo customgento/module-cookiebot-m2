@@ -22,6 +22,11 @@ define([
                 addEventListener('CookiebotOnAccept', () => {
                     if (Cookiebot?.consent?.marketing) {
                         const cookiebotOutput = document?.querySelector('.cookieconsent-optout-marketing');
+
+                        if (!cookiebotOutput) {
+                            return;
+                        }
+
                         const videoElement = cookiebotOutput.closest('.video-unplayed[aria-hidden="false"]');
 
                         const event = new PointerEvent('click', {

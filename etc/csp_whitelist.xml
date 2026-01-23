@@ -8,8 +8,6 @@
                 <value id="cookiebot_cdn" type="host">consentcdn.cookiebot.com</value>
                 <value id="cookiebot_eu" type="host">consent.cookiebot.eu</value>
                 <value id="cookiebot_cdn_eu" type="host">consentcdn.cookiebot.eu</value>
-                <!-- Hash for Cookiebot inline script (nonce not fully supported by uc.js) -->
-                <value id="cookiebot_inline" type="hash" algorithm="sha256">izGUmFn9PZE6G7QuIdXAy77nhcrcwBISVZL+PdWAZFA=</value>
             </values>
         </policy>
         <policy id="frame-src">

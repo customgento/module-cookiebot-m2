@@ -21,9 +21,14 @@ class ScriptGenerator
             %s
             type="text/javascript" async></script>';
 
-    public function __construct(
-        private readonly Config $config
-    ) {
+    /**
+     * @var Config
+     */
+    private $config;
+
+    public function __construct(Config $config)
+    {
+        $this->config = $config;
     }
 
     public function generate(): string

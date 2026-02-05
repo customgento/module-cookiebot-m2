@@ -19,12 +19,19 @@ define([
                 vimeoPattern.test(url);
         }
 
+        function getValidDimension(value, fallback) {
+            if (!value || parseFloat(value) === 0) {
+                return fallback;
+            }
+            return value;
+        }
+
         return function (config, element) {
             const videoElementContainer = $(element);
             const videoElement = videoElementContainer[0];
             const videoElementStyles = window.getComputedStyle(element);
-            const height = videoElementStyles.minHeight || '300px';
-            const width = videoElementStyles.width || '400px';
+            const height = getValidDimension(videoElementStyles.minHeight, '300px');
+            const width = getValidDimension(videoElementStyles.width, '400px');
 
             if (videoElementContainer.data('background-type') !== 'video') {
                 originalWidget(config, element);

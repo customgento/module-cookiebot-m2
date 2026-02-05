@@ -20,13 +20,13 @@ define([
         }
 
         return function (config, element) {
-            const $element = $(element);
-            const videoElement = $element[0];
-            const ElementStyles = window.getComputedStyle(element);
-            const height = ElementStyles.minHeight || '300px';
-            const width = ElementStyles.width || '400px';
+            const videoElementContainer = $(element);
+            const videoElement = videoElementContainer[0];
+            const videoElementStyles = window.getComputedStyle(element);
+            const height = videoElementStyles.minHeight || '300px';
+            const width = videoElementStyles.width || '400px';
 
-            if ($element.data('background-type') !== 'video') {
+            if (videoElementContainer.data('background-type') !== 'video') {
                 originalWidget(config, element);
                 return;
             }

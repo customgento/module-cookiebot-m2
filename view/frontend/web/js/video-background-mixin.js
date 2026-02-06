@@ -1,24 +1,11 @@
 define([
     'jquery',
-    'CustomGento_Cookiebot/js/video-blocker-widget'
-], function ($, createVideoBlocker) {
+    'CustomGento_Cookiebot/js/video-blocker-widget',
+    'CustomGento_Cookiebot/js/video-platform-validator'
+], function ($, createVideoBlocker, isSupportedVideoPlatform) {
     'use strict';
 
     return function (originalWidget) {
-        function isSupportedVideoPlatform(url) {
-            if (!url) {
-                return false;
-            }
-
-            var youtubePattern = /^https?:\/\/(www\.)?(youtube\.com|youtu\.be)\//i;
-            var youtubeNocookiePattern = /^https?:\/\/(www\.)?youtube-nocookie\.com\//i;
-            var vimeoPattern = /^https?:\/\/(www\.)?(vimeo\.com|player\.vimeo\.com)\//i;
-
-            return youtubePattern.test(url) ||
-                youtubeNocookiePattern.test(url) ||
-                vimeoPattern.test(url);
-        }
-
         function getValidDimension(value, fallback) {
             if (!value || parseFloat(value) === 0) {
                 return fallback;
@@ -38,12 +25,12 @@ define([
                 return;
             }
 
-            var blockVideoConsentConfig = window.cookiebotConfig && window.cookiebotConfig.blockVideosUntilConsent;
-            var videoSrc = videoElement.getAttribute('data-video-src');
-            var cookieblockSrc = videoElement.getAttribute('data-cookieblock-src');
-            var src = videoSrc || cookieblockSrc;
-            var previousStatus = '';
-            var blockerElement = null;
+            const blockVideoConsentConfig = window.cookiebotConfig && window.cookiebotConfig.blockVideosUntilConsent;
+            const videoSrc = videoElement.getAttribute('data-video-src');
+            const cookieblockSrc = videoElement.getAttribute('data-cookieblock-src');
+            const src = videoSrc || cookieblockSrc;
+            let previousStatus = '';
+            let blockerElement = null;
 
             if (!blockVideoConsentConfig || !isSupportedVideoPlatform(src)) {
                 originalWidget(config, element);

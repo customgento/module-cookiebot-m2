@@ -1,28 +1,14 @@
 define([
     'jquery',
     'underscore',
+    'CustomGento_Cookiebot/js/video-blocker-widget',
+    'CustomGento_Cookiebot/js/video-platform-validator',
     'Magento_PageBuilder/js/widget/show-on-hover',
-    'Magento_PageBuilder/js/widget/video-background',
-    'CustomGento_Cookiebot/js/video-blocker-widget'
-], function ($, _, showOnHover, videoBackground, createVideoBlocker) {
+    'Magento_PageBuilder/js/widget/video-background'
+], function ($, _, createVideoBlocker, isSupportedVideoPlatform, showOnHover, videoBackground) {
     'use strict';
 
     return function (originalWidget) {
-        function isSupportedVideoPlatform(url) {
-            if (!url) {
-                return false;
-            }
-            
-            // Regex patterns for supported video platforms
-            const youtubePattern = /^https?:\/\/(www\.)?(youtube\.com|youtu\.be)\//i;
-            const youtubeNocookiePattern = /^https?:\/\/(www\.)?youtube-nocookie\.com\//i;
-            const vimeoPattern = /^https?:\/\/(www\.)?(vimeo\.com|player\.vimeo\.com)\//i;
-            
-            return youtubePattern.test(url) || 
-                   youtubeNocookiePattern.test(url) || 
-                   vimeoPattern.test(url);
-        }
-
         return function (config, element) {
             const videoElement = element[0].querySelector('[data-background-type=video]');
 

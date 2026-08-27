@@ -84,7 +84,9 @@ $scriptString = '
     })';
 // checking on if SecureHtmlRenderer exists first, because this module is still compatible with Magento 2.3.x which doesn't include this class
 if (class_exists(SecureHtmlRenderer::class)) {
+    /* @noEscape */
     echo $secureRenderer->renderTag('script', ['data-cookieconsent' => 'ignore'], $scriptString, false);
 } else {
+    /* @noEscape */
     echo '<script data-cookieconsent="ignore">' . $scriptString . '</script>';
 }

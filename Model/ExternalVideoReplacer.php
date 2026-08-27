@@ -18,7 +18,9 @@ class ExternalVideoReplacer
     {
         $iframePatterns = [
             // YouTube patterns
-            '/<iframe([^>]*)\s+src=["\'](https?:\/\/(?:www\.)?(?:youtube\.com|youtube-nocookie\.com)\/embed\/[^"\']+)["\']([^>]*)>/i',
+            '/<iframe([^>]*)\s+src=["\']'
+                . '(https?:\/\/(?:www\.)?(?:youtube\.com|youtube-nocookie\.com)\/embed\/[^"\']+)'
+                . '["\']([^>]*)>/i',
             '/<iframe([^>]*)\s+src=["\'](https?:\/\/(?:www\.)?youtu\.be\/[^"\']+)["\']([^>]*)>/i',
             // Vimeo patterns
             '/<iframe([^>]*)\s+src=["\'](https?:\/\/(?:www\.)?vimeo\.com\/[^"\']+)["\']([^>]*)>/i',
@@ -50,7 +52,9 @@ class ExternalVideoReplacer
         // Pattern to match elements with data-video-src attribute containing YouTube or Vimeo URLs
         $videoBackgroundPatterns = [
             // YouTube patterns in data-video-src
-            '/(<[^>]+)data-video-src=["\'](https?:\/\/(?:www\.)?(?:youtube\.com|youtube-nocookie\.com)\/embed\/[^"\']+)["\']([^>]*>)/i',
+            '/(<[^>]+)data-video-src=["\']'
+                . '(https?:\/\/(?:www\.)?(?:youtube\.com|youtube-nocookie\.com)\/embed\/[^"\']+)'
+                . '["\']([^>]*>)/i',
             '/(<[^>]+)data-video-src=["\'](https?:\/\/(?:www\.)?youtu\.be\/[^"\']+)["\']([^>]*>)/i',
             // Vimeo patterns in data-video-src
             '/(<[^>]+)data-video-src=["\'](https?:\/\/(?:www\.)?vimeo\.com\/[^"\']+)["\']([^>]*>)/i',

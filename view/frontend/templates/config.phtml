@@ -21,4 +21,5 @@ $configJson = json_encode([
 
 $script = 'window.cookiebotConfig = ' . $configJson . ';';
 
+/* @noEscape */
 echo $secureRenderer->renderTag('script', ['type' => 'text/javascript'], $script, false);

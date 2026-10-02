@@ -45,7 +45,7 @@ class HtmlContentFilterObserver implements ObserverInterface
 
             $content = $response->getBody();
 
-            if (empty($content) || !is_string($content)) {
+            if (empty($content)) {
                 return;
             }
 

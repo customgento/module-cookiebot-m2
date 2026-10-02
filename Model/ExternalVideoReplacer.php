@@ -41,7 +41,7 @@ class ExternalVideoReplacer
 
                 return '<iframe' . $beforeSrc . ' data-cookieblock-src="' . $iframeUrl
                     . '" data-cookieconsent="marketing"' . $afterSrc . '>';
-            }, $content);
+            }, $content) ?? $content;
         }
 
         return $content;
@@ -74,7 +74,7 @@ class ExternalVideoReplacer
 
                 return $beforeAttr . 'data-cookieblock-src="' . $videoUrl
                     . '" data-cookieconsent="marketing"' . $afterAttr;
-            }, $content);
+            }, $content) ?? $content;
         }
 
         return $content;

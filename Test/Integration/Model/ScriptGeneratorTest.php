@@ -4,25 +4,12 @@ declare(strict_types=1);
 
 namespace CustomGento\Cookiebot\Test\Integration\Model;
 
-use CustomGento\Cookiebot\Model\Config;
 use CustomGento\Cookiebot\Model\ScriptGenerator;
 use Magento\Framework\App\ObjectManager;
-use Magento\TestFramework\ObjectManager as TestFrameworkObjectManager;
 use PHPUnit\Framework\TestCase;
 
 class ScriptGeneratorTest extends TestCase
 {
-    /**
-     * @var Config
-     */
-    private $config;
-
-    protected function setUp(): void
-    {
-        parent::setUp();
-        $this->config = TestFrameworkObjectManager::getInstance()->create(Config::class);
-    }
-
     /**
      * @magentoConfigFixture current_store web/cookiebot/use_eu_cdn 0
      */

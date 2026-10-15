@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace CustomGento\Cookiebot\Test\Integration\Plugin;
 
 use CustomGento\Cookiebot\Model\ScriptGenerator;
+use Magento\TestFramework\Response;
 use Magento\TestFramework\TestCase\AbstractController;
 
 class AddScriptTest extends AbstractController
@@ -27,7 +28,7 @@ class AddScriptTest extends AbstractController
     public function testScriptAddedOnHomepage(): void
     {
         $this->dispatch('/');
-        self::assertStringContainsString($this->script, $this->getResponse()->getBody());
+        self::assertStringContainsString($this->script, $this->getResponseBody());
     }
 
     /**
@@ -37,7 +38,7 @@ class AddScriptTest extends AbstractController
     public function testGoogleConsentScriptAddedOnHomepage(): void
     {
         $this->dispatch('/');
-        self::assertStringContainsString('gtag("set", "ads_data_redaction", true);', $this->getResponse()->getBody());
+        self::assertStringContainsString('gtag("set", "ads_data_redaction", true);', $this->getResponseBody());
     }
 
     /**
@@ -48,7 +49,7 @@ class AddScriptTest extends AbstractController
     public function testScriptAddedOnProductPage(): void
     {
         $this->dispatch('/catalog/product/view/id/1');
-        self::assertStringContainsString($this->script, $this->getResponse()->getBody());
+        self::assertStringContainsString($this->script, $this->getResponseBody());
     }
 
     /**
@@ -59,7 +60,7 @@ class AddScriptTest extends AbstractController
     public function testScriptAddedOnCategoryPage(): void
     {
         $this->dispatch('/catalog/category/view/id/333');
-        self::assertStringContainsString($this->script, $this->getResponse()->getBody());
+        self::assertStringContainsString($this->script, $this->getResponseBody());
     }
 
     /**
@@ -70,6 +71,13 @@ class AddScriptTest extends AbstractController
     public function testScriptAddedOnCmsPage(): void
     {
         $this->dispatch('/page100');
-        self::assertStringContainsString($this->script, $this->getResponse()->getBody());
+        self::assertStringContainsString($this->script, $this->getResponseBody());
+    }
+
+    private function getResponseBody(): string
+    {
+        $response = $this->getResponse();
+        self::assertInstanceOf(Response::class, $response);
+        return $response->getBody();
     }
 }

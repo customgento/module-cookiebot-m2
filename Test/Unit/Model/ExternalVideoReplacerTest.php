@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace CustomGento\Cookiebot\Test\Unit\Model;
 
 use CustomGento\Cookiebot\Model\ExternalVideoReplacer;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class ExternalVideoReplacerTest extends TestCase
@@ -22,18 +23,19 @@ class ExternalVideoReplacerTest extends TestCase
     /**
      * @dataProvider iframeDataProvider
      */
+    #[DataProvider('iframeDataProvider')]
     public function testReplaceIframeSources(string $input, string $expected): void
     {
         $result = $this->externalVideoReplacer->replaceIframeSources($input);
         $this->assertEquals($expected, $result);
     }
 
-    public function iframeDataProvider(): array
+    public static function iframeDataProvider(): array
     {
-        return array_merge($this->youTubeCases(), $this->vimeoCases(), $this->generalCases());
+        return array_merge(self::youTubeCases(), self::vimeoCases(), self::generalCases());
     }
 
-    private function youTubeCases(): array
+    private static function youTubeCases(): array
     {
         return [
             'youtube.com embed'                              => [
@@ -74,7 +76,7 @@ class ExternalVideoReplacerTest extends TestCase
         ];
     }
 
-    private function vimeoCases(): array
+    private static function vimeoCases(): array
     {
         return [
             'vimeo.com embed'                                => [
@@ -105,7 +107,7 @@ class ExternalVideoReplacerTest extends TestCase
         ];
     }
 
-    private function generalCases(): array
+    private static function generalCases(): array
     {
         return [
             'single quotes'                                  => [

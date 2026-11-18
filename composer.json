@@ -21,7 +21,11 @@
     },
     "require-dev": {
         "phpunit/phpunit": "^6.5||^9.5",
-        "roave/security-advisories": "dev-latest"
+        "roave/security-advisories": "dev-latest",
+        "magento/magento-coding-standard": "^41",
+        "phpstan/phpstan": "^2.1",
+        "bitexpert/phpstan-magento": "^0.44",
+        "phpstan/extension-installer": "^1.4"
     },
     "autoload": {
         "files": [
@@ -29,6 +33,12 @@
         ],
         "psr-4": {
             "CustomGento\\Cookiebot\\": ""
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "phpstan/extension-installer": true
         }
     }
 }

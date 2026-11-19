@@ -1,0 +1,9 @@
+name: ExtDN M2 Unit Tests
+on: [push, pull_request]
+
+jobs:
+  unit:
+    uses: customgento/m2-github-actions/.github/workflows/unit.yml@main
+    with:
+      module_name: CustomGento_Cookiebot
+      composer_name: customgento/module-cookiebot-m2
